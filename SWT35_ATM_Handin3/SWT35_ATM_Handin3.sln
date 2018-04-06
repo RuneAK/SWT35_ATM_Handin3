@@ -5,6 +5,15 @@ VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWT35_ATM_Handin3", "SWT35_ATM_Handin3\SWT35_ATM_Handin3.csproj", "{885D503E-F15F-4820-82FD-BF3672394D1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWT35_ATM_Handin3.Test.Unit", "SWT35_ATM_Handin3.Test.Unit\SWT35_ATM_Handin3.Test.Unit.csproj", "{990E6D1E-C01A-435A-BEDA-164DF803EB4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWT35_ATM_Handin3.Test.Integration", "SWT35_ATM_Handin3.Test.Integration\SWT35_ATM_Handin3.Test.Integration.csproj", "{CD021392-7D85-498F-971A-0EBF085FFC16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A9AB792-CCF1-4F4F-B92A-0B472A8D663B}"
+	ProjectSection(SolutionItems) = preProject
+		..\dotCoverCoverageConfig .xml = ..\dotCoverCoverageConfig .xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +24,14 @@ Global
 		{885D503E-F15F-4820-82FD-BF3672394D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885D503E-F15F-4820-82FD-BF3672394D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{885D503E-F15F-4820-82FD-BF3672394D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990E6D1E-C01A-435A-BEDA-164DF803EB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990E6D1E-C01A-435A-BEDA-164DF803EB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990E6D1E-C01A-435A-BEDA-164DF803EB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990E6D1E-C01A-435A-BEDA-164DF803EB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD021392-7D85-498F-971A-0EBF085FFC16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD021392-7D85-498F-971A-0EBF085FFC16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD021392-7D85-498F-971A-0EBF085FFC16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD021392-7D85-498F-971A-0EBF085FFC16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
