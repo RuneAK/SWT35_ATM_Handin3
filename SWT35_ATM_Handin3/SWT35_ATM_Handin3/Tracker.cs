@@ -13,7 +13,7 @@ namespace SWT35_ATM_Handin3
 		private List<Track> _tracks = new List<Track>();
 
 		private readonly ITrackFactory _trackFactory;
-		public event EventHandler<EventArgsTracksUpdated> TracksUpdated;
+		public event EventHandler<TracksUpdatedEventArgs> TracksUpdated;
 
 		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory)
 		{
@@ -33,10 +33,10 @@ namespace SWT35_ATM_Handin3
 
 			_tracks.AddRange(newTracks);
 
-			OnTracksUpdated(new EventArgsTracksUpdated{Tracks = newTracks});
+			OnTracksUpdated(new TracksUpdatedEventArgs{Tracks = newTracks});
 		}
 
-		private void OnTracksUpdated(EventArgsTracksUpdated args)
+		private void OnTracksUpdated(TracksUpdatedEventArgs args)
 		{
 			var handler = TracksUpdated;
 			handler?.Invoke(this, args);

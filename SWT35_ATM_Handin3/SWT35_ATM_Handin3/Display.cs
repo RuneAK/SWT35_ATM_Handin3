@@ -14,7 +14,7 @@ namespace SWT35_ATM_Handin3
 			tracker.TracksUpdated += WriteToConsole;
 		}
 
-		private void WriteToConsole(object o, EventArgsTracksUpdated args)
+		private void WriteToConsole(object o, TracksUpdatedEventArgs args)
 		{
 			foreach (var track in args.Tracks)
 			{

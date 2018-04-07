@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Display.cs" />
-    <Compile Include="EventArgsTracksUpdated.cs" />
+    <Compile Include="TracksUpdatedEventArgs.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Interfaces\ITracker.cs" />
     <Compile Include="Interfaces\ITrackFactory.cs" />
