@@ -34,16 +34,19 @@ namespace SWT35_ATM_Handin3.Test.Unit
 			Assert.That(_uut.CreateTrack(transsponderTestString).XCoordinate, Is.EqualTo(43210));
 		}
 
+        [Test]
 		public void CreateTrack_YCoordinateCorrect()
 		{
-			Assert.That(_uut.CreateTrack(transsponderTestString).YCoordinate, Is.EqualTo(43210));
+			Assert.That(_uut.CreateTrack(transsponderTestString).YCoordinate, Is.EqualTo(54321));
 		}
 
+        [Test]
 		public void CreateTrack_AltitudeCorrect()
 		{
 			Assert.That(_uut.CreateTrack(transsponderTestString).Altitude, Is.EqualTo(12345));
 		}
 
+        [Test]
 		public void CreateTrack_TimestampCorrect()
 		{
 			Assert.That(_uut.CreateTrack(transsponderTestString).Timestamp, Is.EqualTo(new DateTime(2000, 01, 01, 23, 59,59,999)));
