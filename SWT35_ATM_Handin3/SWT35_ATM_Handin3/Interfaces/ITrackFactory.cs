@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWT35_ATM_Handin3.Test.Unit
+namespace SWT35_ATM_Handin3.Interfaces
 {
-    public class Class1
-    {
-    }
+	public interface ITrackFactory
+	{
+		Track CreateTrack(string info);
+	}
 }

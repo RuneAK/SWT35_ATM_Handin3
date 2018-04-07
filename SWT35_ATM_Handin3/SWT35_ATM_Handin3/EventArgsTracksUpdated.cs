@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SWT35_ATM_Handin3
 {
-    public class Class1
-    {
-    }
+	public class EventArgsTracksUpdated : EventArgs
+	{
+		public List<Track> Tracks { get; set; }
+	}
 }
