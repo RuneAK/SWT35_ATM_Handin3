@@ -13,7 +13,6 @@ namespace SWT35_ATM_Handin3
 		private List<Track> _tracks = new List<Track>();
 
 		private readonly ITrackFactory _trackFactory;
-		//private IDisplay _display;
 		public event EventHandler<EventArgsTracksUpdated> TracksUpdated;
 
 		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory)
