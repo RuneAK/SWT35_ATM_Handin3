@@ -14,5 +14,7 @@ namespace SWT35_ATM_Handin3
 		public int YCoordinate { get; set; }
 		public uint Altitude { get; set; }
 		public DateTime Timestamp { get; set; }
+		public double HorizontalVelocity { get; set; }
+		public double CompassCourse { get; set; }
 	}
 }

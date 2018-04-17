@@ -18,7 +18,9 @@ namespace SWT35_ATM_Handin3
 		{
 			foreach (var track in args.Tracks)
 			{
-				Console.WriteLine("Tag: " + track.Tag + " Xcoordinate: " + track.XCoordinate + " Ycoordinate: " + track.YCoordinate + " Altitude: " + track.Altitude + " Time: " + track.Timestamp.ToString("yyyy-M-d HH:mm:ss:fff"));
+				var hv = Math.Round(track.HorizontalVelocity, 2);
+				Console.WriteLine("Tag: " + track.Tag + " Current position: " + track.XCoordinate + "," + track.YCoordinate +
+				                  " Altitude: " + track.Altitude + " Horizontal velocity: " + Math.Round(track.HorizontalVelocity, 2) + "m/s Compass course: " + Math.Round(track.CompassCourse,2) +"°");
 			}
 		}
 	}
