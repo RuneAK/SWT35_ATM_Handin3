@@ -14,7 +14,8 @@ namespace SWT35_ATM_Handin3.Application
 		{
 			ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 			ITrackFactory trackFactory = new TrackFactory();
-			ITracker tracker = new Tracker(transponderReceiver,trackFactory);
+			ICalculator calculator = new Calculator(300,5000);
+			ITracker tracker = new Tracker(transponderReceiver,trackFactory, calculator);
 			IDisplay display = new Display(tracker);
 
 			Console.ReadLine();

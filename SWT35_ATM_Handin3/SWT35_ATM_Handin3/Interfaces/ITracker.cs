@@ -8,6 +8,6 @@ namespace SWT35_ATM_Handin3.Interfaces
 {
 	public interface ITracker
 	{
-		event EventHandler<TracksUpdatedEventArgs> TracksUpdated;
+		event EventHandler<UpdateEventArgs> TracksUpdated;
 	}
 }

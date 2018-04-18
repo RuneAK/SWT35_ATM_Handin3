@@ -10,8 +10,7 @@ namespace SWT35_ATM_Handin3
 	public class Track
 	{
 		public string Tag { get; set; }
-		public int XCoordinate { get; set; }
-		public int YCoordinate { get; set; }
+		public Point Position { get; set; }
 		public uint Altitude { get; set; }
 		public DateTime Timestamp { get; set; }
 		public double HorizontalVelocity { get; set; }

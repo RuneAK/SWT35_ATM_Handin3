@@ -59,8 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator.cs" />
     <Compile Include="Display.cs" />
-    <Compile Include="TracksUpdatedEventArgs.cs" />
+    <Compile Include="Interfaces\ICalculator.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Separation.cs" />
+    <Compile Include="UpdateEventArgs.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Interfaces\ITracker.cs" />
     <Compile Include="Interfaces\ITrackFactory.cs" />
