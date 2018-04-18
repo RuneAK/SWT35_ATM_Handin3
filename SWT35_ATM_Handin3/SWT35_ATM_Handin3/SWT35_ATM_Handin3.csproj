@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airspace.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
