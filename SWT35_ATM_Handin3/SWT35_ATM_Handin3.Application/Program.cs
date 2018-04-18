@@ -17,6 +17,7 @@ namespace SWT35_ATM_Handin3.Application
 			ICalculator calculator = new Calculator(300,5000);
 			ITracker tracker = new Tracker(transponderReceiver,trackFactory, calculator);
 			IDisplay display = new Display(tracker);
+			ILogger logger = new Logger(tracker,"Log.txt");
 
 			Console.ReadLine();
 		}

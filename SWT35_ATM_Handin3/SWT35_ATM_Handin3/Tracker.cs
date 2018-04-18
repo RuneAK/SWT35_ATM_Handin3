@@ -12,10 +12,10 @@ namespace SWT35_ATM_Handin3
 	public class Tracker : ITracker
 	{
 		private List<Track> _tracks = new List<Track>();
-		private List<Separation> _sperations = new List<Separation>();
 		
 		private readonly ITrackFactory _trackFactory;
 		private readonly ICalculator _calculator;
+		
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
 		
 		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory, ICalculator calculator)
@@ -34,6 +34,19 @@ namespace SWT35_ATM_Handin3
 				var newTrack = _trackFactory.CreateTrack(info);
 				newTracks.Add(newTrack);
 			}
+
+			//Test
+			var test1 = new Track();
+			test1.Tag = "Test1";
+			test1.Altitude = 100;
+			test1.Position = new Point(100,100);
+			var test2 = new Track();
+			test2.Tag = "Test2";
+			test2.Altitude = 200;
+			test2.Position = new Point(200,200);
+			newTracks.Add(test1);
+			newTracks.Add(test2);
+			//
 
 			_tracks = Update(newTracks);
 			var separationEvents = new List<Separation>();
@@ -65,75 +78,6 @@ namespace SWT35_ATM_Handin3
 			handler?.Invoke(this, args);
 		}
 
-
-		/* Obsolete!
-		private Track CalculateVelocityAndCompassCourse(Track oldTrack, Track newTrack)
-		{
-
-			DONE!
-			TimeSpan diff = newTrack.Timestamp.Subtract(oldTrack.Timestamp);
-			var timeDifference = diff.TotalSeconds;
-			var distance = Math.Sqrt(Math.Pow((newTrack.XCoordinate - oldTrack.XCoordinate), 2) + Math.Pow((newTrack.YCoordinate - oldTrack.YCoordinate), 2));
-			var velocity = distance / timeDifference;
-			newTrack.HorizontalVelocity = velocity;
-
-			DONE!
-			var Y = newTrack.YCoordinate - oldTrack.YCoordinate;
-			var X = newTrack.XCoordinate - oldTrack.XCoordinate;
-			if (X != 0 && Y != 0)
-			{
-				var divide = (newTrack.YCoordinate - oldTrack.YCoordinate) / (newTrack.XCoordinate - oldTrack.XCoordinate);
-				var compassCourse = Math.Atan(divide) / Math.PI * 180;
-
-				if (compassCourse < 0)
-				{
-					compassCourse += 360;
-				}
-
-				newTrack.CompassCourse = compassCourse;
-			}
-			else if(X==0)
-			{
-				newTrack.CompassCourse = 90;
-			}
-			else if(Y==0)
-			{
-				newTrack.CompassCourse = 0;
-			}
-			else
-			{
-				newTrack.CompassCourse = Double.NaN;
-
-			}
-			
-
-			return newTrack;
-		}
-		*/
-
-		/* Obselete
-		private bool CheckSeperation(Track trackOne, Track trackTwo)
-		{
-			if (Math.Abs(trackOne.Altitude - trackTwo.Altitude) < 300)
-			{
-				var xsqr = Math.Pow(trackOne.XCoordinate - trackTwo.XCoordinate, 2);
-				var ysqr = Math.Pow(trackOne.YCoordinate - trackTwo.YCoordinate,2);
-				if (Math.Sqrt(xsqr + ysqr)<5000)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			else
-			{
-				return false;
-			}
-		}
-		*/
-		
 		private List<Track> Update(List<Track> newTracks)
 		{
 			var updatedTracks = new List<Track>();
