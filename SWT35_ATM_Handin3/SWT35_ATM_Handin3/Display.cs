@@ -25,7 +25,7 @@ namespace SWT35_ATM_Handin3
 				Console.WriteLine("***SeparationEvent(s)***");
 				foreach (var separation in args.SeparationEvents)
 				{
-					Console.WriteLine("Tags: " + separation.Tag1 + "/" + separation.Tag2 + " Time: " + separation.Time);
+					Console.WriteLine("Tags: " + separation.Tag1 + "/" + separation.Tag2 + " TimeRaised: " + separation.Time);
 				}
 				Console.WriteLine("----------------------");
 

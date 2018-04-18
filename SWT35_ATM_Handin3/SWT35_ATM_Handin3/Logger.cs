@@ -10,20 +10,20 @@ namespace SWT35_ATM_Handin3
 {
 	public class Logger : ILogger
 	{
-		private StreamWriter _streamWriter;
-		
+		private readonly string _filePathAndName;
+
 		public Logger(ITracker tracker,string filePathAndName)
 		{
-			_streamWriter = new StreamWriter(filePathAndName,true);
-			tracker.TracksUpdated += WriteToLog;
+			_filePathAndName = filePathAndName;
+			tracker.SeparationsUpdated += WriteToLog;
 		}
 
-		public void WriteToLog(object o, UpdateEventArgs args)
+		public void WriteToLog(object o, UpdateLogArgs args)
 		{
-			foreach (var separation in args.SeparationEvents)
+			var logstring = args.SeparationEvent.Tag1 + ";" + args.SeparationEvent.Tag2 + ";" + args.SeparationEvent.Time.ToString("yyyyMMddHHmmssfff");
+			using (System.IO.StreamWriter file = new System.IO.StreamWriter(@_filePathAndName, true))
 			{
-				var logstring = separation.Tag1 + ";" + separation.Tag2 + ";" + separation.Time.ToString("yyyyMMddHHmmssfff");
-				_streamWriter.WriteLine(logstring);
+				file.WriteLine(logstring);
 			}
 		}
 	}

@@ -12,14 +12,18 @@ namespace SWT35_ATM_Handin3
 	public class Tracker : ITracker
 	{
 		private List<Track> _tracks = new List<Track>();
+		private List<Separation> _separations = new List<Separation>();
+		private bool _currentSeparationEvent;
 		
 		private readonly ITrackFactory _trackFactory;
 		private readonly ICalculator _calculator;
 		
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
-		
+		public event EventHandler<UpdateLogArgs>SeparationsUpdated;
+
 		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory, ICalculator calculator)
 		{
+			_currentSeparationEvent = false;
 			_calculator = calculator;
 			_trackFactory = trackFactory;
 			transponderReceiver.TransponderDataReady += AddNewTracks;
@@ -49,8 +53,7 @@ namespace SWT35_ATM_Handin3
 			//
 
 			_tracks = Update(newTracks);
-			var separationEvents = new List<Separation>();
-
+			
 			foreach (var trackOne in _tracks)
 			{
 				foreach (var trackTwo in _tracks)
@@ -63,18 +66,38 @@ namespace SWT35_ATM_Handin3
 							newSeperationEvent.Tag1 = trackOne.Tag;
 							newSeperationEvent.Tag2 = trackTwo.Tag;
 							newSeperationEvent.Time = DateTime.Now;
-							separationEvents.Add(newSeperationEvent);
+
+							if (_separations.Find(i => i.Tag1 == trackOne.Tag && i.Tag2 == trackTwo.Tag) == null && _separations.Find(i => i.Tag2 == trackOne.Tag && i.Tag1 == trackTwo.Tag) == null)
+							{
+								_separations.Add(newSeperationEvent);
+								OnSeparationsUpdated(new UpdateLogArgs{SeparationEvent = newSeperationEvent});
+							}
 						}
 					}	
 				}
 			}
+			foreach (var se in _separations)
+			{
+				var track1 = _tracks.Find(i => i.Tag == se.Tag1);
+				var track2 = _tracks.Find(i => i.Tag == se.Tag2);
+				if (!_calculator.CalculateSeperation(track1.Altitude, track2.Altitude, track1.Position, track2.Position))
+				{
+					_separations.Remove(se);
+				}
+			}
 
-			OnTracksUpdated(new UpdateEventArgs{Tracks = _tracks, SeparationEvents = separationEvents});
+			OnTracksUpdated(new UpdateEventArgs{Tracks = _tracks, SeparationEvents = _separations});
 		}
 
 		private void OnTracksUpdated(UpdateEventArgs args)
 		{
 			var handler = TracksUpdated;
+			handler?.Invoke(this, args);
+		}
+
+		private void OnSeparationsUpdated(UpdateLogArgs args)
+		{
+			var handler = SeparationsUpdated;
 			handler?.Invoke(this, args);
 		}
 
