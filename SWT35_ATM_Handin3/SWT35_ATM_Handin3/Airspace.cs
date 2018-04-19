@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SWT35_ATM_Handin3.Helpers;
 
 namespace SWT35_ATM_Handin3
 {
@@ -28,19 +29,5 @@ namespace SWT35_ATM_Handin3
                (UpperBound.Alt <= LowerBound.Alt))
                 throw new ArgumentException();
         }
-    }
-
-    public class Boundary
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Alt { get; set; }
-
-        public Boundary(int x = 0, int y = 0, int alt = 0)
-        {
-            X = x;
-            Y = y;
-            Alt = alt;
-        }
-    }
+    }   
 }
