@@ -22,6 +22,17 @@ namespace SWT35_ATM_Handin3.Test.Unit
 
 	    }
 
+	    [TestCase("TAG12;43210;54321;12345;20000101235959999")]
+	    [TestCase("0;88888;22222;400;19991224120500122")]
+        public void CreateTrack_CanCreate(string info)
+	    {
+	        Assert.That(_uut.CreateTrack(info).Tag, Is.EqualTo(info.Split(';')[0]));
+	        Assert.That(_uut.CreateTrack(info).Position.X, Is.EqualTo(Int32.Parse(info.Split(';')[1])));
+	        Assert.That(_uut.CreateTrack(info).Position.Y, Is.EqualTo(Int32.Parse(info.Split(';')[2])));
+	        Assert.That(_uut.CreateTrack(info).Position.Alt, Is.EqualTo(Int32.Parse(info.Split(';')[3])));
+	        Assert.That(_uut.CreateTrack(info).Timestamp, Is.EqualTo(DateTime.ParseExact(info.Split(';')[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture)));
+        }
+
 		[Test]
 		public void CreateTrack_TagCorrect()
 		{
