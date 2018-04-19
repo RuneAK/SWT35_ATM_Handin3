@@ -16,6 +16,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		private Tracker _uut;
 		private ITrackFactory _trackfactory;
 		private ITransponderReceiver _transponderReceiver;
+		private ICalculator _calculator;
 		private int _nEventsReceived;
 		private List<string> _rawTranssponderData;
 		[SetUp]
@@ -27,7 +28,8 @@ namespace SWT35_ATM_Handin3.Test.Unit
 
 			_trackfactory = Substitute.For<ITrackFactory>();
 			_transponderReceiver = Substitute.For<ITransponderReceiver>();
-			_uut = new Tracker(_transponderReceiver, _trackfactory);
+			_calculator = Substitute.For<ICalculator>();
+			_uut = new Tracker(_transponderReceiver, _trackfactory, _calculator);
 			_uut.TracksUpdated += (o, args) =>
 			{
 				++_nEventsReceived;
