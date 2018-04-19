@@ -14,5 +14,10 @@ namespace SWT35_ATM_Handin3.Helpers
             Y = y;
             Alt = alt;
         }
+
+        public bool Positive()
+        {
+            return X >= 0 && Y >= 0 && Alt >= 0;
+        }
     }
 }
