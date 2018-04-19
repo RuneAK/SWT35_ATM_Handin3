@@ -64,6 +64,8 @@
     <Compile Include="TrackerTest.cs" />
     <Compile Include="TrackFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TracksTest.cs" />
+    <Compile Include="UpdateEventArgsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
