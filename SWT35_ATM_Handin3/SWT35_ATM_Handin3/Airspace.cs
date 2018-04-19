@@ -12,7 +12,7 @@ namespace SWT35_ATM_Handin3
         public Boundary LowerBound { get; set; }
         public Boundary UpperBound { get; set; }
 
-        public Airspace(Boundary lowerBound, Boundary upperBound)
+        public Airspace(Boundary lowerBound = null, Boundary upperBound = null)
         {
             // Check if lower bounds exceeds south-west corner
             LowerBound = lowerBound ?? new Boundary(10000, 10000, 500);
