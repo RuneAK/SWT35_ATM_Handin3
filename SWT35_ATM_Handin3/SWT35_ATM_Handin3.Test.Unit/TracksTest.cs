@@ -24,10 +24,27 @@ namespace SWT35_ATM_Handin3.Test.Unit
             _uut = new Tracks(_calculator);
         }
 
-        [TestCase()]
-        public void Tracks_CanAdd_Track(ITrack track)
+        [Test]
+        public void Tracks_CanAdd_Track()
         {
+            // Act
+            _uut.Add(_track);
 
+            // Assert
+            Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
         }
+
+        /*
+        [Test]
+        public void Tracks_CanUpdate_Tracks()
+        {
+            _uut.FlightTracks.Add(_track);
+            _uut.Update(_uut);
+
+            // Assert
+            Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
+        }
+        */
+        
     }
 }
