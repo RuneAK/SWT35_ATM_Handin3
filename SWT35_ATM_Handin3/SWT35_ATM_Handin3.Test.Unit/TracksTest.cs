@@ -14,12 +14,13 @@ namespace SWT35_ATM_Handin3.Test.Unit
     {
         private ICalculator _calculator;
         private Tracks _uut;
-        private ITrack _track;
+        private Track _track;
+        private TrackFactory _factory;
 
         [SetUp]
         public void SetUp()
         {
-            _track = Substitute.For<ITrack>();
+            _factory = new TrackFactory();
             _calculator = Substitute.For<ICalculator>();
             _uut = new Tracks(_calculator);
         }
@@ -34,17 +35,16 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
         }
 
-        /*
-        [Test]
-        public void Tracks_CanUpdate_Tracks()
+
+        [TestCase("TAG12;43210;54321;12345;20000101235959999")]
+        public void Tracks_CanUpdate_Tracks(string tag)
         {
+            _track = _factory.CreateTrack(tag);
             _uut.FlightTracks.Add(_track);
             _uut.Update(_uut);
 
             // Assert
             Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
-        }
-        */
-        
+        }              
     }
 }
