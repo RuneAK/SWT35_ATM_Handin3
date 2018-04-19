@@ -63,5 +63,17 @@ namespace SWT35_ATM_Handin3.Test.Unit
         {
             Assert.Throws<ArgumentException>(() => _uut = new Airspace(lowerBound: new Boundary(x, y, alt)));
         }
+
+        [TestCase(10000, 10000, 500)]
+        [TestCase(10000, 10000, 501)]
+        [TestCase(10001, 10000, 500)]
+        [TestCase(10000, 10001, 500)]
+        [TestCase(10001, 10000, 501)]
+        [TestCase(10000, 10001, 501)]
+        [TestCase(10001, 10001, 500)]
+        public void Airspace_Upperbound_ThrowsException(int x, int y, int alt)
+        {
+            Assert.Throws<ArgumentException>(() => _uut = new Airspace(upperBound: new Boundary(x, y, alt)));
+        }
     }
 }
