@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SWT35_ATM_Handin3
 {
-	public class Point
-	{
-		public Point(int xCoordinate, int yCoordinate)
-		{
-			XCoordinate = xCoordinate;
-			YCoordinate = yCoordinate;
-		}
-		public int XCoordinate { get; private set; }
-		public int YCoordinate { get; private set; }
-	}
+    public class Point
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Alt { get; set; }
+
+        public Point(int x = 0, int y = 0, int alt = 0)
+        {
+            X = x;
+            Y = y;
+            Alt = alt;
+        }
+    }
 }

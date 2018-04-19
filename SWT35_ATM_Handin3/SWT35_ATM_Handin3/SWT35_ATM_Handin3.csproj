@@ -60,13 +60,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airspace.cs" />
+    <Compile Include="Interfaces\ISeparationEvent.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\ICalculator.cs" />
+    <Compile Include="Interfaces\ITrack.cs" />
+    <Compile Include="Interfaces\ITracks.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Separation.cs" />
+    <Compile Include="SeparationEvent.cs" />
+    <Compile Include="Tracks.cs" />
     <Compile Include="UpdateEventArgs.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Interfaces\ITracker.cs" />
@@ -79,12 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SWT35_ATM_Handin3.Helpers\SWT35_ATM_Handin3.Helpers.csproj">
-      <Project>{f0d91114-4a9e-4662-8a2a-7819f3d8d07e}</Project>
-      <Name>SWT35_ATM_Handin3.Helpers</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

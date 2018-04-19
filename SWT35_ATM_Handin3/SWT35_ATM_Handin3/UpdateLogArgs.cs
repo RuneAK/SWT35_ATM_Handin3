@@ -8,6 +8,6 @@ namespace SWT35_ATM_Handin3
 {
 	public class UpdateLogArgs : EventArgs
 	{
-		public Separation SeparationEvent{get;set;}
+		public SeparationEvent SeparationEvent{get;set;}
 	}
 }

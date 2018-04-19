@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework.Constraints;
@@ -11,13 +12,13 @@ namespace SWT35_ATM_Handin3
 {
 	public class Tracker : ITracker
 	{
-		private List<Track> _tracks = new List<Track>();
-		private List<Separation> _separations = new List<Separation>();
+		
+		private List<SeparationEvent> _separations = new List<SeparationEvent>();
 		private bool _currentSeparationEvent;
 		
 		private readonly ITrackFactory _trackFactory;
 		private readonly ICalculator _calculator;
-		
+		private ITracks _flightTracks;
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
 		public event EventHandler<UpdateLogArgs>SeparationsUpdated;
 
@@ -26,12 +27,13 @@ namespace SWT35_ATM_Handin3
 			_currentSeparationEvent = false;
 			_calculator = calculator;
 			_trackFactory = trackFactory;
-			transponderReceiver.TransponderDataReady += AddNewTracks;
+			_flightTracks = new Tracks(_calculator);
+			transponderReceiver.TransponderDataReady += Tracking;
 		}
 
-		private void AddNewTracks(object o, RawTransponderDataEventArgs args)
+		private void Tracking(object o, RawTransponderDataEventArgs args)
 		{
-			var newTracks = new List<Track>();
+			ITracks newTracks = new Tracks(_calculator);
 
 			foreach (var info in args.TransponderData)
 			{
@@ -39,7 +41,9 @@ namespace SWT35_ATM_Handin3
 				newTracks.Add(newTrack);
 			}
 
-			//Test
+			_flightTracks.Update(newTracks);
+
+			/* !!!Test!!!
 			var test1 = new Track();
 			test1.Tag = "Test1";
 			test1.Altitude = 100;
@@ -50,10 +54,9 @@ namespace SWT35_ATM_Handin3
 			test2.Position = new Point(200,200);
 			newTracks.Add(test1);
 			newTracks.Add(test2);
-			//
+			*/
 
-			_tracks = Update(newTracks);
-			
+			/*
 			foreach (var trackOne in _tracks)
 			{
 				foreach (var trackTwo in _tracks)
@@ -62,11 +65,8 @@ namespace SWT35_ATM_Handin3
 					{
 						if(_calculator.CalculateSeperation(trackOne.Altitude, trackTwo.Altitude,trackOne.Position,trackTwo.Position))
 						{
-							var newSeperationEvent = new Separation();
-							newSeperationEvent.Tag1 = trackOne.Tag;
-							newSeperationEvent.Tag2 = trackTwo.Tag;
-							newSeperationEvent.Time = DateTime.Now;
-
+							var newSeperationEvent = new Separation(trackOne.tag, trackTwo.Tag, DateTime.Now);
+							
 							if (_separations.Find(i => i.Tag1 == trackOne.Tag && i.Tag2 == trackTwo.Tag) == null && _separations.Find(i => i.Tag2 == trackOne.Tag && i.Tag1 == trackTwo.Tag) == null)
 							{
 								_separations.Add(newSeperationEvent);
@@ -85,8 +85,14 @@ namespace SWT35_ATM_Handin3
 					_separations.Remove(se);
 				}
 			}
-
+			*/
 			OnTracksUpdated(new UpdateEventArgs{Tracks = _tracks, SeparationEvents = _separations});
+			
+		}
+
+		private void SeperationEvents(ITracks tracks)
+		{
+
 		}
 
 		private void OnTracksUpdated(UpdateEventArgs args)
@@ -101,6 +107,7 @@ namespace SWT35_ATM_Handin3
 			handler?.Invoke(this, args);
 		}
 
+		/*
 		private List<Track> Update(List<Track> newTracks)
 		{
 			var updatedTracks = new List<Track>();
@@ -110,8 +117,8 @@ namespace SWT35_ATM_Handin3
 				var oldTrack = _tracks.Find(i => i.Tag == newTrack.Tag);
 				if (oldTrack == null)
 				{
-					newTrack.CompassCourse = Double.NaN;
-					newTrack.HorizontalVelocity = Double.NaN;
+					//newTrack.CompassCourse = Double.NaN;
+					//newTrack.HorizontalVelocity = Double.NaN;
 					updatedTracks.Add(newTrack);
 				}
 				else
@@ -126,5 +133,6 @@ namespace SWT35_ATM_Handin3
 			return updatedTracks;
 
 		}
+		*/
 	}
 }

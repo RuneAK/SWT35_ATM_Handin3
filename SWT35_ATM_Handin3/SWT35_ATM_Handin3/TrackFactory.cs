@@ -15,8 +15,7 @@ namespace SWT35_ATM_Handin3
 			var track = new Track();
 
 			track.Tag = splitInfo[0];
-			track.Position = new Point(Int32.Parse(splitInfo[1]), Int32.Parse(splitInfo[2]));
-			track.Altitude = UInt32.Parse(splitInfo[3]);
+			track.Position = new Point(Int32.Parse(splitInfo[1]), Int32.Parse(splitInfo[2]), Int32.Parse(splitInfo[3]));
 			track.Timestamp = DateTime.ParseExact(splitInfo[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture);
 
 			return track;

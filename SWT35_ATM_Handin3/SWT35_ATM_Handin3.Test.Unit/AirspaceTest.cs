@@ -36,7 +36,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         [TestCase(89999, 89999, 19999)]
         public void Airspace_Lowerbound_CanInit(int x, int y, int alt)
         {
-            _uut = new Airspace(lowerBound: new Boundary(x, y, alt));
+            _uut = new Airspace(lowerBound: new Point(x, y, alt));
             Assert.That(_uut.LowerBound.X, Is.EqualTo(x));
             Assert.That(_uut.LowerBound.Y, Is.EqualTo(y));
             Assert.That(_uut.LowerBound.Alt, Is.EqualTo(alt));
@@ -46,7 +46,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         [TestCase(90000, 90000, 20000)]
         public void Airspace_Upperbound_CanInit(int x, int y, int alt)
         {
-            _uut = new Airspace(upperBound: new Boundary(x, y, alt));
+            _uut = new Airspace(upperBound: new Point(x, y, alt));
             Assert.That(_uut.UpperBound.X, Is.EqualTo(x));
             Assert.That(_uut.UpperBound.Y, Is.EqualTo(y));
             Assert.That(_uut.UpperBound.Alt, Is.EqualTo(alt));
@@ -61,7 +61,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         [TestCase(89999, 89999, 20000)]
         public void Airspace_Lowerbound_ThrowsException(int x, int y, int alt)
         {
-            Assert.Throws<ArgumentException>(() => _uut = new Airspace(lowerBound: new Boundary(x, y, alt)));
+            Assert.Throws<ArgumentException>(() => _uut = new Airspace(lowerBound: new Point(x, y, alt)));
         }
 
         [TestCase(10000, 10000, 500)]
@@ -73,7 +73,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         [TestCase(10001, 10001, 500)]
         public void Airspace_Upperbound_ThrowsException(int x, int y, int alt)
         {
-            Assert.Throws<ArgumentException>(() => _uut = new Airspace(upperBound: new Boundary(x, y, alt)));
+            Assert.Throws<ArgumentException>(() => _uut = new Airspace(upperBound: new Point(x, y, alt)));
         }
     }
 }

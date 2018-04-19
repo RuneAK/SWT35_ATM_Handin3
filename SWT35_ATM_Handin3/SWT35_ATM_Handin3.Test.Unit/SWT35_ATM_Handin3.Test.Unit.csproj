@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirspaceTest.cs" />
-    <Compile Include="BoundaryTest.cs" />
+    <Compile Include="PointTest.cs" />
     <Compile Include="TrackerTest.cs" />
     <Compile Include="TrackFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,10 +69,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SWT35_ATM_Handin3.Helpers\SWT35_ATM_Handin3.Helpers.csproj">
-      <Project>{f0d91114-4a9e-4662-8a2a-7819f3d8d07e}</Project>
-      <Name>SWT35_ATM_Handin3.Helpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SWT35_ATM_Handin3\SWT35_ATM_Handin3.csproj">
       <Project>{885d503e-f15f-4820-82fd-bf3672394d1a}</Project>
       <Name>SWT35_ATM_Handin3</Name>
