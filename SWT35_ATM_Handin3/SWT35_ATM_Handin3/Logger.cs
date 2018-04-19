@@ -18,9 +18,9 @@ namespace SWT35_ATM_Handin3
 			tracker.SeparationsUpdated += WriteToLog;
 		}
 
-		public void WriteToLog(object o, UpdateLogArgs args)
+		public void WriteToLog(object o, SeparationEvent args)
 		{
-			var logstring = args.SeparationEvent.Tag1 + ";" + args.SeparationEvent.Tag2 + ";" + args.SeparationEvent.Time.ToString("yyyyMMddHHmmssfff");
+			var logstring = args.Tag1 + ";" + args.Tag2 + ";" + args.Time.ToString("yyyyMMddHHmmssfff");
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter(@_filePathAndName, true))
 			{
 				file.WriteLine(logstring);

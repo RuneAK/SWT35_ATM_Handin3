@@ -15,6 +15,7 @@ namespace SWT35_ATM_Handin3
 		public Tracks(ICalculator calculator)
 		{
 			_calculator = calculator;
+			FlightTracks = new List<ITrack>();
 		}
 
 		public void Add(ITrack track)
@@ -35,6 +36,7 @@ namespace SWT35_ATM_Handin3
 				}
 				else
 				{
+					FlightTracks.Remove(oldTrack);
 					newTrack.HorizontalVelocity = _calculator.CalculateHorizontalVelocity(oldTrack.Position, newTrack.Position,
 						oldTrack.Timestamp, newTrack.Timestamp);
 					newTrack.CompassCourse = _calculator.CalculateCompassCourse(oldTrack.Position, newTrack.Position);

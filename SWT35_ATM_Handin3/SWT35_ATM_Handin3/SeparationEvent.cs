@@ -15,6 +15,7 @@ namespace SWT35_ATM_Handin3
 			Tag2 = tag2;
 			Time = time;
 		}
+
 		public string Tag1 { get; }
 		public string Tag2 { get; }
 		public DateTime Time { get; }

@@ -20,7 +20,7 @@ namespace SWT35_ATM_Handin3
 		private readonly ICalculator _calculator;
 		private ITracks _flightTracks;
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
-		public event EventHandler<UpdateLogArgs>SeparationsUpdated;
+		public event EventHandler<SeparationEvent>SeparationsUpdated;
 
 		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory, ICalculator calculator)
 		{
@@ -42,6 +42,7 @@ namespace SWT35_ATM_Handin3
 			}
 
 			_flightTracks.Update(newTracks);
+			SeperationEvents();
 
 			/* !!!Test!!!
 			var test1 = new Track();
@@ -56,43 +57,48 @@ namespace SWT35_ATM_Handin3
 			newTracks.Add(test2);
 			*/
 
-			/*
-			foreach (var trackOne in _tracks)
-			{
-				foreach (var trackTwo in _tracks)
-				{
-					if (trackOne.Tag != trackTwo.Tag)
-					{
-						if(_calculator.CalculateSeperation(trackOne.Altitude, trackTwo.Altitude,trackOne.Position,trackTwo.Position))
-						{
-							var newSeperationEvent = new Separation(trackOne.tag, trackTwo.Tag, DateTime.Now);
-							
-							if (_separations.Find(i => i.Tag1 == trackOne.Tag && i.Tag2 == trackTwo.Tag) == null && _separations.Find(i => i.Tag2 == trackOne.Tag && i.Tag1 == trackTwo.Tag) == null)
-							{
-								_separations.Add(newSeperationEvent);
-								OnSeparationsUpdated(new UpdateLogArgs{SeparationEvent = newSeperationEvent});
-							}
-						}
-					}	
-				}
-			}
-			foreach (var se in _separations)
-			{
-				var track1 = _tracks.Find(i => i.Tag == se.Tag1);
-				var track2 = _tracks.Find(i => i.Tag == se.Tag2);
-				if (!_calculator.CalculateSeperation(track1.Altitude, track2.Altitude, track1.Position, track2.Position))
-				{
-					_separations.Remove(se);
-				}
-			}
-			*/
-			OnTracksUpdated(new UpdateEventArgs{Tracks = _tracks, SeparationEvents = _separations});
+			
+			
+			
+			
+			OnTracksUpdated(new UpdateEventArgs{Tracks = _flightTracks, SeparationEvents = _separations});
 			
 		}
 
-		private void SeperationEvents(ITracks tracks)
+		private void SeperationEvents()
 		{
+			foreach (var trackOne in _flightTracks.FlightTracks)
+			{
+				foreach (var trackTwo in _flightTracks.FlightTracks)
+				{
+					if (trackOne.Tag != trackTwo.Tag)
+					{
+						if (_calculator.CalculateSeperation(trackOne.Position, trackTwo.Position))
+						{
+							var newSeperationEvent = new SeparationEvent(trackOne.Tag, trackTwo.Tag, DateTime.Now);
 
+							if (_separations.Find(i => i.Tag1 == trackOne.Tag && i.Tag2 == trackTwo.Tag) == null && _separations.Find(i => i.Tag2 == trackOne.Tag && i.Tag1 == trackTwo.Tag) == null)
+							{
+								OnSeparationsUpdated(newSeperationEvent);
+								_separations.Add(newSeperationEvent);
+							}
+						}
+					}
+				}
+			}
+
+			if (_separations.Any())
+			{
+				foreach (var se in _separations)
+				{
+					var track1 = _flightTracks.FlightTracks.Find(i => i.Tag == se.Tag1);
+					var track2 = _flightTracks.FlightTracks.Find(i => i.Tag == se.Tag2);
+					if (!_calculator.CalculateSeperation(track1.Position, track2.Position))
+					{
+						//remove me from list PLEASE!
+					}
+				}
+			}
 		}
 
 		private void OnTracksUpdated(UpdateEventArgs args)
@@ -101,38 +107,11 @@ namespace SWT35_ATM_Handin3
 			handler?.Invoke(this, args);
 		}
 
-		private void OnSeparationsUpdated(UpdateLogArgs args)
+		private void OnSeparationsUpdated(SeparationEvent args)
 		{
 			var handler = SeparationsUpdated;
 			handler?.Invoke(this, args);
 		}
 
-		/*
-		private List<Track> Update(List<Track> newTracks)
-		{
-			var updatedTracks = new List<Track>();
-
-			foreach (var newTrack in newTracks)
-			{
-				var oldTrack = _tracks.Find(i => i.Tag == newTrack.Tag);
-				if (oldTrack == null)
-				{
-					//newTrack.CompassCourse = Double.NaN;
-					//newTrack.HorizontalVelocity = Double.NaN;
-					updatedTracks.Add(newTrack);
-				}
-				else
-				{
-					newTrack.HorizontalVelocity = _calculator.CalculateHorizontalVelocity(oldTrack.Position, newTrack.Position,
-						oldTrack.Timestamp, newTrack.Timestamp);
-					newTrack.CompassCourse = _calculator.CalculateCompassCourse(oldTrack.Position, newTrack.Position);
-					updatedTracks.Add(newTrack);
-				}
-			}
-
-			return updatedTracks;
-
-		}
-		*/
 	}
 }

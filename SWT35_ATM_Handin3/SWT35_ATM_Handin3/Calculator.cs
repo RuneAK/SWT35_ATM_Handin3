@@ -22,7 +22,7 @@ namespace SWT35_ATM_Handin3
 
 			TimeSpan diff = newTimeStamp.Subtract(oldTimeStamp);
 			var timeDifference = diff.TotalSeconds;
-			var distance = Math.Sqrt(Math.Pow((newPoint.XCoordinate - oldPoint.XCoordinate), 2) + Math.Pow((newPoint.YCoordinate - oldPoint.YCoordinate), 2));
+			var distance = Math.Sqrt(Math.Pow((newPoint.X - oldPoint.X), 2) + Math.Pow((newPoint.Y - oldPoint.Y), 2));
 			var velocity = distance / timeDifference;
 			
 			return velocity;
@@ -30,38 +30,61 @@ namespace SWT35_ATM_Handin3
 
 		public double CalculateCompassCourse(Point oldPoint, Point newPoint)
 		{
-			var Y = newPoint.YCoordinate - oldPoint.YCoordinate;
-			var X = newPoint.XCoordinate - oldPoint.XCoordinate;
-			if (X != 0 && Y != 0)
-			{
-				var divide = (newPoint.YCoordinate - oldPoint.YCoordinate) / (newPoint.XCoordinate - oldPoint.XCoordinate);
-				var compassCourse = Math.Atan(divide) / Math.PI * 180;
-
-				if (compassCourse < 0)
-				{
-					compassCourse += 360;
-				}
-
-				return compassCourse;
-			}
-			else if (X == 0)
-			{
-				return 90;
-			}
-			else if (Y == 0)
-			{
-				return 0;
-			}
+			double Y = Math.Abs(newPoint.Y - oldPoint.Y);
+			double X = Math.Abs(newPoint.X - oldPoint.X);
+			double compassCourse  = Math.Atan2(Y, X) * (180 / Math.PI);
 			
-			return  Double.NaN;
+			//West
+			if (newPoint.X < oldPoint.X)
+			{
+				//South
+				if (newPoint.Y < oldPoint.Y)				
+					compassCourse += 180;
+				//North
+				else
+					compassCourse += 270;
+			}
+			//East
+			else if (newPoint.X > oldPoint.X)
+			{
+				//South
+				if (newPoint.Y < oldPoint.Y)
+					compassCourse += 90;
+			}
+			//NorthSouth-Direction
+			else if(X==0)
+			{
+				//South
+				if (newPoint.Y < oldPoint.Y)
+					compassCourse = 180;
+				//North
+				else
+					compassCourse = 0;
+			}
+			//EastWest-Direction
+			else if(Y==0)
+			{
+				//West
+				if (newPoint.X < oldPoint.X)
+					compassCourse = 270;
+				//East
+				else
+					compassCourse = 90;
+			}
+			else
+			{
+				return Double.NaN;
+			}
+
+			return compassCourse;
 		}
 
-		public bool CalculateSeperation(uint altitude1, uint altitude2, Point point1, Point point2)
+		public bool CalculateSeperation(Point point1, Point point2)
 		{
-			if (Math.Abs(altitude1 - altitude2) < _verticalMin)
+			if (Math.Abs(point1.Alt - point2.Alt) < _verticalMin)
 			{
-				var xsqr = Math.Pow(point1.XCoordinate - point2.XCoordinate, 2);
-				var ysqr = Math.Pow(point1.YCoordinate - point2.YCoordinate, 2);
+				var xsqr = Math.Pow(point1.X - point2.X, 2);
+				var ysqr = Math.Pow(point1.Y - point2.Y, 2);
 				if (Math.Sqrt(xsqr + ysqr) < _horizontalMin)
 				{
 					return true;

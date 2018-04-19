@@ -31,19 +31,19 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		[Test]
 		public void CreateTrack_XCoordinateCorrect()
 		{
-			Assert.That(_uut.CreateTrack(transsponderTestString).Position.XCoordinate, Is.EqualTo(43210));
+			Assert.That(_uut.CreateTrack(transsponderTestString).Position.X, Is.EqualTo(43210));
 		}
 
         [Test]
 		public void CreateTrack_YCoordinateCorrect()
 		{
-			Assert.That(_uut.CreateTrack(transsponderTestString).Position.YCoordinate, Is.EqualTo(54321));
+			Assert.That(_uut.CreateTrack(transsponderTestString).Position.Y, Is.EqualTo(54321));
 		}
 
         [Test]
 		public void CreateTrack_AltitudeCorrect()
 		{
-			Assert.That(_uut.CreateTrack(transsponderTestString).Altitude, Is.EqualTo(12345));
+			Assert.That(_uut.CreateTrack(transsponderTestString).Position.Alt, Is.EqualTo(12345));
 		}
 
         [Test]

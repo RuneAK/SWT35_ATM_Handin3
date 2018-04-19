@@ -33,11 +33,11 @@ namespace SWT35_ATM_Handin3
 
 			Console.ResetColor();
 
-			foreach (var track in args.Tracks)
+			foreach (var track in args.Tracks.FlightTracks)
 			{
 				var hv = Math.Round(track.HorizontalVelocity, 2);
-				Console.WriteLine("Tag: " + track.Tag + " CurrentPosition: " + track.Position.XCoordinate + "mE," + track.Position.YCoordinate +
-				                  "mN Altitude: " + track.Altitude + "m HorizontalVelocity: " +
+				Console.WriteLine("Tag: " + track.Tag + " CurrentPosition: " + track.Position.X + "mE," + track.Position.Y +
+				                  "mN Altitude: " + track.Position.Alt + "m HorizontalVelocity: " +
 				                  Math.Round(track.HorizontalVelocity, 2) + "m/s CompassCourse: " +
 				                  Math.Round(track.CompassCourse, 2) + "°");
 			}

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SWT35_ATM_Handin3;
-using SWT35_ATM_Handin3.Helpers;
 
 namespace SWT35_ATM_Handin3.Test.Unit
 {
