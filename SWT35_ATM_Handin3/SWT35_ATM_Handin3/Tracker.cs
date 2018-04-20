@@ -18,31 +18,31 @@ namespace SWT35_ATM_Handin3
 		
 		private readonly ITrackFactory _trackFactory;
 		private readonly ICalculator _calculator;
-		private ITracks _flightTracks;
+		private readonly ITracks _flightTracks;
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
 		public event EventHandler<SeparationEvent>SeparationsUpdated;
 
-		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory, ICalculator calculator)
+		public Tracker(ITrackFactory trackFactory, ICalculator calculator)
 		{
 			_currentSeparationEvent = false;
 			_calculator = calculator;
 			_trackFactory = trackFactory;
 			_flightTracks = new Tracks(_calculator);
-			transponderReceiver.TransponderDataReady += Tracking;
+			_trackFactory.TracksUpdated += Tracking;
 		}
 
-		private void Tracking(object o, RawTransponderDataEventArgs args)
+		private void Tracking(object o, UpdateEventArgs args)
 		{
-			ITracks newTracks = new Tracks(_calculator);
-
-			foreach (var info in args.TransponderData)
+			if (args.Tracks.FlightTracks.Count != 0)
 			{
-				var newTrack = _trackFactory.CreateTrack(info);
-				newTracks.Add(newTrack);
+				_flightTracks.Update(args.Tracks);
 			}
 
-			_flightTracks.Update(newTracks);
-			SeperationEvents();
+			if (_flightTracks.FlightTracks.Count != 0)
+			{
+				SeperationEvents();
+			}
+			
 
 			/* !!!Test!!!
 			var test1 = new Track();
@@ -56,13 +56,10 @@ namespace SWT35_ATM_Handin3
 			newTracks.Add(test1);
 			newTracks.Add(test2);
 			*/
-
-			
-			
-			
-			
-			OnTracksUpdated(new UpdateEventArgs{Tracks = _flightTracks, SeparationEvents = _separations});
-			
+			if (_separations.Count != 0 || _flightTracks.FlightTracks.Count != 0)
+			{
+				OnTracksUpdated(new UpdateEventArgs { Tracks = _flightTracks, SeparationEvents = _separations });
+			}
 		}
 
 		private void SeperationEvents()

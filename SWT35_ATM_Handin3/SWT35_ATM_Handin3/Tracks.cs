@@ -12,6 +12,11 @@ namespace SWT35_ATM_Handin3
 	{
 		public List<ITrack> FlightTracks { get; }
 		private ICalculator _calculator;
+
+		public Tracks()
+		{
+			FlightTracks = new List<ITrack>();
+		}
 		public Tracks(ICalculator calculator)
 		{
 			_calculator = calculator;

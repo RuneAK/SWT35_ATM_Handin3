@@ -8,6 +8,6 @@ namespace SWT35_ATM_Handin3.Interfaces
 {
 	public interface ITrackFactory
 	{
-		Track CreateTrack(string info);
+		event EventHandler<UpdateEventArgs> TracksUpdated;
 	}
 }
