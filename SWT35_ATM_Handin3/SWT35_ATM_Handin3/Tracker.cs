@@ -12,19 +12,16 @@ namespace SWT35_ATM_Handin3
 {
 	public class Tracker : ITracker
 	{
-		
+		private readonly ITracks _flightTracks;
 		private List<SeparationEvent> _separations = new List<SeparationEvent>();
-		private bool _currentSeparationEvent;
-		
 		private readonly ITrackFactory _trackFactory;
 		private readonly ICalculator _calculator;
-		private readonly ITracks _flightTracks;
+		
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
 		public event EventHandler<SeparationEvent>SeparationsUpdated;
 
 		public Tracker(ITrackFactory trackFactory, ICalculator calculator)
 		{
-			_currentSeparationEvent = false;
 			_calculator = calculator;
 			_trackFactory = trackFactory;
 			_flightTracks = new Tracks(_calculator);
