@@ -7,7 +7,7 @@ using SWT35_ATM_Handin3.Interfaces;
 
 namespace SWT35_ATM_Handin3
 {
-	public class SeparationEvent : ISeparationEvent
+	public class SeparationEvent : EventArgs
 	{
 		public SeparationEvent(string tag1, string tag2, DateTime time)
 		{
