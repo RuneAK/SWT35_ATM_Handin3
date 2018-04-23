@@ -36,11 +36,13 @@ namespace SWT35_ATM_Handin3.Test.Unit
 	    //[TestCase("0;88888;22222;400;19991224120500122")]
         public void Initial_TransponderStringsChangedOnce_CanCreateTrack(string info)
 	    {
+			//Setup transponderdata
 			var transpondersdata = new List<string>();
 			transpondersdata.Add(info);
 		    var args = new RawTransponderDataEventArgs(transpondersdata);
+			//Act
 		    _transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-			
+			//Assert
 			Assert.That(_tracks.FlightTracks[0].Tag, Is.EqualTo(info.Split(';')[0]));
 			Assert.That(_tracks.FlightTracks[0].Position.X, Is.EqualTo(Int32.Parse(info.Split(';')[1])));
 			Assert.That(_tracks.FlightTracks[0].Position.Y, Is.EqualTo(Int32.Parse(info.Split(';')[2])));
