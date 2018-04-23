@@ -64,6 +64,7 @@
     <Compile Include="DisplayTest.cs" />
     <Compile Include="LoggerTest.cs" />
     <Compile Include="PointTest.cs" />
+    <Compile Include="SeparationEventTest.cs" />
     <Compile Include="TrackerTest.cs" />
     <Compile Include="TrackFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
