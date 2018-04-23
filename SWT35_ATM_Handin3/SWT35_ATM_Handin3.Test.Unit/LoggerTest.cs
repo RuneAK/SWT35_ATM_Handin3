@@ -20,8 +20,8 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		[SetUp]
 		public void SetUp()
 		{
-			_separationEvent = Substitute.For<SeparationEvent>();
-				//new SeparationEvent("tag1","tag2",new DateTime(1999,31,12,23,59,59,999));
+			//_separationEvent = Substitute.For<SeparationEvent>();
+			//new SeparationEvent("tag1","tag2",new DateTime(1999,31,12,23,59,59,999));
 			_tracker = Substitute.For<ITracker>();
 			_uut = new Logger(_tracker, "tets.txt");
 		}
@@ -30,7 +30,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		public void WriteToLogTest()
 		{
 			//Act
-			_tracker.SeparationsUpdated += Raise.EventWith(_separationEvent);
+			//_tracker.SeparationsUpdated += Raise.EventWith(_separationEvent);
 
 			//Assert
 			//https://stackoverflow.com/questions/12480563/c-sharp-unit-test-a-streamwriter-parameter

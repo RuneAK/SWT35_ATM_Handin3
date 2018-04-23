@@ -28,7 +28,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		public void TestOutPut()
 		{
 			//Act
-			_tracker.TracksUpdated += Raise.EventWith(_args);
+			//_tracker.TracksUpdated += Raise.EventWith(_args);
 
 			//Assert
 			//Can console output be tested?
