@@ -17,13 +17,11 @@ namespace SWT35_ATM_Handin3.Test.Unit
         private ICalculator _calculator;
         private Tracks _uut;
         private ITrack _track;
-        private TrackFactory _factory;
 
         [SetUp]
         public void SetUp()
         {
-	        //_transponderReceiver = Substitute.For<ITransponderReceiver>();
-            //_factory = new TrackFactory(_transponderReceiver);
+	        _transponderReceiver = Substitute.For<ITransponderReceiver>();
             _track = Substitute.For<ITrack>();
             _calculator = Substitute.For<ICalculator>();
             _uut = new Tracks(_calculator);
@@ -39,17 +37,21 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
         }
 
-		/*
-        [TestCase("TAG12;43210;54321;12345;20000101235959999")]
-        public void Tracks_CanUpdate_Tracks(string tag)
+		
+        [Test]
+        public void Tracks_CanUpdate_Tracks()
         {
-            _track = _factory.CreateTrack(tag);
-            _uut.FlightTracks.Add(_track);
-            _uut.Update(_uut);
+
+			//Setup additional Tracks object
+			var testTracks = new Tracks();
+			testTracks.FlightTracks.Add(_track);
+
+			//Act
+            _uut.Update(testTracks);
 
             // Assert
             Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
-        }
-		*/
+		}
+		
     }
 }
