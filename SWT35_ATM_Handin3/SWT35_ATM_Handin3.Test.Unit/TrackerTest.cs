@@ -14,6 +14,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 	[TestFixture]
 	public class TrackerTest
 	{
+		private IAirspace _airspace;
 		private ITracks _tracks;
 		private Tracker _uut;
 		private ITrackFactory _trackfactory;
@@ -29,6 +30,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 			_display = Substitute.For<IDisplay>();
 			_trackfactory = Substitute.For<ITrackFactory>();
 			_calculator = Substitute.For<ICalculator>();
+			_airspace = Substitute.For<IAirspace>();
 
 			var testTrack = new Track();
 			testTrack.Tag = "´TAG12";
@@ -39,7 +41,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 			_testTrackEvent.Tracks = new Tracks();
 			_testTrackEvent.Tracks.Add(testTrack);
 
-			_uut = new Tracker(_trackfactory, _calculator);
+			_uut = new Tracker(_trackfactory, _calculator, _airspace);
 			_uut.TracksUpdated += (o, args) =>
 			{
 				_tracks = args.Tracks;

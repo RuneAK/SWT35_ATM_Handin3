@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using SWT35_ATM_Handin3.Interfaces;
@@ -98,6 +99,26 @@ namespace SWT35_ATM_Handin3
 			else
 			{
 				return false;
+			}
+		}
+
+		public bool CalculateWithinAirspace(Point point, Point boundaryPoint1, Point boundaryPoint2)
+		{
+			if (point.X < boundaryPoint1.X || point.Y < boundaryPoint1.Y)
+			{
+				return false;
+			}
+			else if(point.X > boundaryPoint2.X || point.Y>boundaryPoint2.Y)
+			{
+				return false;
+			}
+			else if (point.Alt < boundaryPoint1.Alt || point.Alt > boundaryPoint2.Alt)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
 			}
 		}
 	}
