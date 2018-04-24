@@ -14,6 +14,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
     public class TracksTest
     {
 		private ICalculator _calculator;
+	    private IAirspace _airspace;
         private Tracks _uut;
         private ITrack _track;
 
@@ -22,7 +23,8 @@ namespace SWT35_ATM_Handin3.Test.Unit
         {
 	        _track = Substitute.For<ITrack>();
             _calculator = Substitute.For<ICalculator>();
-            _uut = new Tracks(_calculator);
+	        _airspace = Substitute.For<IAirspace>();
+            _uut = new Tracks(_calculator,_airspace);
         }
 
         [Test]

@@ -29,12 +29,9 @@ namespace SWT35_ATM_Handin3.Test.Unit
 	    {
 			//Act
 		    _uut.Tracks = _tracks;
-		    _uut.SeparationEvents = new List<SeparationEvent>();
-			_uut.SeparationEvents.Add(_separationEvent);
-
+		    
 			//Assert
 			Assert.That(_uut.Tracks, Is.EqualTo(_tracks));
-			Assert.That(_uut.SeparationEvents[0], Is.EqualTo(_separationEvent));
 
 	    }
     }
