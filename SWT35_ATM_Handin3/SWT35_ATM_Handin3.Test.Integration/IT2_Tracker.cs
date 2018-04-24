@@ -94,14 +94,17 @@ namespace SWT35_ATM_Handin3.Test.Integration
 		public void NewTransponderData_TrackOutsideAirspace_NotWritten()
 		{
 			var testInfo1 = "TestTag1;9000;9000;5000;20001231235959000";
+			var testInfo2 = "TestTag1;9000;9000;5000;20001231235959000";
 			var transpondersdata = new List<string>();
 			transpondersdata.Add(testInfo1);
+			transpondersdata.Add(testInfo2);
 			var args = new RawTransponderDataEventArgs(transpondersdata);
 
 			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
 
 			_display.DidNotReceive().Write("Tag: TestTag1 CurrentPosition: 9000mE,9000mN Altitude: 5000m HorizontalVelocity: 0m/s CompassCourse: 0°");
-			
+			_display.DidNotReceive().WriteRed("TestTag1/TestTag2 Time: 31-Dec-00 23:59:59");
+			_logger.DidNotReceive().WriteToFile("TestTag1;TestTag2;31-Dec-00 23:59:59");
 		}
 	}
 }
