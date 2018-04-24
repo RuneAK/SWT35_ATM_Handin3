@@ -12,7 +12,7 @@ using SWT35_ATM_Handin3.Interfaces;
 namespace SWT35_ATM_Handin3.Test.Integration
 {
 	[TestFixture]
-		public class IT2_Tracks
+		public class IT1_Tracks
 		{
 			//Real
 			private ICalculator _calculator;
