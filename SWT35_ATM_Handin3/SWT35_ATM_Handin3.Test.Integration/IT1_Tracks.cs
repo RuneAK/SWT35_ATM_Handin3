@@ -21,18 +21,22 @@ namespace SWT35_ATM_Handin3.Test.Integration
 			private ITrack _testTrack2;
 
 			//Stubs
-			private IDisplay _display;
-			private ILogger _logger;
-			private ISeperationRepository _seperationRepository;
-			private ITrackFactory _trackFactory;
-			private ITracker _tracker;
-
+			
 			//Units under test
 			private ITracks _uut;
 		
 
 			[SetUp]
 			public void SetUp()
+			{
+				_calculator = new Calculator(300,5000);
+				_airspace = new Airspace();
+				_uut = new Tracks(_calculator,_airspace);
+
+			}
+
+			[Test]
+			public void Update_TracksUpdatedCorrectly()
 			{
 				_testTrack1 = new Track
 				{
@@ -48,25 +52,46 @@ namespace SWT35_ATM_Handin3.Test.Integration
 					Timestamp = new DateTime(2000, 1, 1, 12, 00, 01, 000)
 				};
 
-				_calculator = new Calculator(300,5000);
-				_airspace = new Airspace();
-				_uut = new Tracks(_calculator,_airspace);
-
-				_display = Substitute.For<IDisplay>();
-				_logger = Substitute.For<ILogger>();
-				_s
-
-			}
-
-			[Test]
-			public void FirstFunctionToTest()
-			{
 				var testTracks = new Tracks();
 				testTracks.Add(_testTrack1);
 				_uut.Update(testTracks);
 				testTracks = new Tracks();
 				testTracks.Add(_testTrack2);
 				_uut.Update(testTracks);
+
+				Assert.That(_uut.FlightTracks[0].HorizontalVelocity, Is.EqualTo(500));
+				Assert.That(_uut.FlightTracks[0].CompassCourse, Is.EqualTo(Math.Atan2(4, 3) * (180 / Math.PI)));
+				Assert.That(_uut.FlightTracks[0], Is.EqualTo(_testTrack2));
+				Assert.That(_uut.FlightTracks.Count, Is.EqualTo(1));
 			}
-		}
+			
+			[Test]
+			public void Update_TwoTracksUpdatedCorrectly()
+			{
+				_testTrack1 = new Track
+				{
+					Tag = "TestTag1",
+					Position = new Point(20000, 20000, 5000),
+					Timestamp = new DateTime(2000, 1, 1, 12, 00, 00, 000)
+				};
+
+				_testTrack2 = new Track
+				{
+					Tag = "TestTag2",
+					Position = new Point(20300, 20400, 5100),
+					Timestamp = new DateTime(2000, 1, 1, 12, 00, 01, 000)
+				};
+
+				var testTracks = new Tracks();
+				testTracks.Add(_testTrack1);
+				_uut.Update(testTracks);
+				testTracks = new Tracks();
+				testTracks.Add(_testTrack2);
+				_uut.Update(testTracks);
+
+				Assert.That(_uut.FlightTracks[0], Is.EqualTo(_testTrack1));
+				Assert.That(_uut.FlightTracks[1], Is.EqualTo(_testTrack2));
+			Assert.That(_uut.FlightTracks.Count, Is.EqualTo(2));
+			}
+	}
 }
