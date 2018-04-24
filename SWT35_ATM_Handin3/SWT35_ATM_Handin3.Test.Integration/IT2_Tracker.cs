@@ -11,7 +11,7 @@ using TransponderReceiver;
 
 namespace SWT35_ATM_Handin3.Test.Integration
 {
-	public class IT3_Tracker
+	public class IT2_Tracker
 	{
 		//Real
 		private ICalculator _calculator;
@@ -64,6 +64,44 @@ namespace SWT35_ATM_Handin3.Test.Integration
 			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
 
 			_display.Received(1).WriteRed("TestTag1/TestTag2 Time: 31-Dec-00 23:59:59");
+			_logger.Received(1).WriteToFile("TestTag1;TestTag2;31-Dec-00 23:59:59");
+		}
+
+		[Test]
+		public void NewTransponderData_SeparationEventStops_NotWritten()
+		{
+			var testInfo1 = "TestTag1;20000;20000;5000;20001231235959000";
+			var testInfo2 = "TestTag2;20000;20000;5000;20001231235959000";
+			var transpondersdata = new List<string>();
+			transpondersdata.Add(testInfo1);
+			transpondersdata.Add(testInfo2);
+			var args = new RawTransponderDataEventArgs(transpondersdata);
+
+			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
+
+			testInfo2 = "TestTag2;40000;40000;5000;20001231235959000";
+			transpondersdata.Add(testInfo1);
+			transpondersdata.Add(testInfo2);
+			args = new RawTransponderDataEventArgs(transpondersdata);
+
+			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
+
+			_display.Received(1).WriteRed("TestTag1/TestTag2 Time: 31-Dec-00 23:59:59");
+			_logger.Received(1).WriteToFile("TestTag1;TestTag2;31-Dec-00 23:59:59");
+		}
+
+		[Test]
+		public void NewTransponderData_TrackOutsideAirspace_NotWritten()
+		{
+			var testInfo1 = "TestTag1;9000;9000;5000;20001231235959000";
+			var transpondersdata = new List<string>();
+			transpondersdata.Add(testInfo1);
+			var args = new RawTransponderDataEventArgs(transpondersdata);
+
+			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
+
+			_display.DidNotReceive().Write("Tag: TestTag1 CurrentPosition: 9000mE,9000mN Altitude: 5000m HorizontalVelocity: 0m/s CompassCourse: 0°");
+			
 		}
 	}
 }
