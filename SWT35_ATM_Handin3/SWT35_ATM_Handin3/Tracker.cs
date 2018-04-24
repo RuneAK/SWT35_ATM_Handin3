@@ -12,7 +12,6 @@ namespace SWT35_ATM_Handin3
 {
 	public class Tracker : ITracker
 	{
-		private IAirspace _airspace;
 		private readonly ITracks _flightTracks;
 		private List<SeparationEvent> _separations = new List<SeparationEvent>();
 		private readonly ITrackFactory _trackFactory;
@@ -21,12 +20,11 @@ namespace SWT35_ATM_Handin3
 		public event EventHandler<UpdateEventArgs> TracksUpdated;
 		public event EventHandler<SeparationEvent>SeparationsUpdated;
 
-		public Tracker(ITrackFactory trackFactory, ICalculator calculator, IAirspace airspace)
+		public Tracker(ITrackFactory trackFactory, ICalculator calculator)
 		{
-			_airspace = airspace;
 			_calculator = calculator;
 			_trackFactory = trackFactory;
-			_flightTracks = new Tracks(_calculator);
+			_flightTracks = new Tracks(_calculator, new Airspace());
 			_trackFactory.TracksUpdated += Tracking;
 		}
 
@@ -42,19 +40,6 @@ namespace SWT35_ATM_Handin3
 				SeperationEvents();
 			}
 			
-
-			/* !!!Test!!!
-			var test1 = new Track();
-			test1.Tag = "Test1";
-			test1.Altitude = 100;
-			test1.Position = new Point(100,100);
-			var test2 = new Track();
-			test2.Tag = "Test2";
-			test2.Altitude = 200;
-			test2.Position = new Point(200,200);
-			newTracks.Add(test1);
-			newTracks.Add(test2);
-			*/
 			if (_separations.Count != 0 || _flightTracks.FlightTracks.Count != 0)
 			{
 				OnTracksUpdated(new UpdateEventArgs { Tracks = _flightTracks, SeparationEvents = _separations });

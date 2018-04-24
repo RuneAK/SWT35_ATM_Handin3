@@ -8,5 +8,7 @@ namespace SWT35_ATM_Handin3.Interfaces
 {
 	public interface IAirspace
 	{
+		Point LowerBound { get; }
+		Point UpperBound { get; }
 	}
 }
