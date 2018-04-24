@@ -12,13 +12,15 @@ namespace SWT35_ATM_Handin3
 	{
 		public List<ITrack> FlightTracks { get; }
 		private ICalculator _calculator;
+		private IAirspace _airspace;
 
 		public Tracks()
 		{
 			FlightTracks = new List<ITrack>();
 		}
-		public Tracks(ICalculator calculator)
+		public Tracks(ICalculator calculator, IAirspace airspace)
 		{
+			_airspace = airspace;
 			_calculator = calculator;
 			FlightTracks = new List<ITrack>();
 		}
@@ -33,20 +35,27 @@ namespace SWT35_ATM_Handin3
 			foreach (var newTrack in flightTracks.FlightTracks)
 			{
 				var oldTrack = FlightTracks.Find(i => i.Tag == newTrack.Tag);
-				if (oldTrack == null)
+
+				if (_calculator.CalculateWithinAirspace(newTrack.Position, _airspace.LowerBound, _airspace.UpperBound))
 				{
-					//newTrack.CompassCourse = Double.NaN;
-					//newTrack.HorizontalVelocity = Double.NaN;
-					FlightTracks.Add(newTrack);
+					if (oldTrack == null)
+					{
+						FlightTracks.Add(newTrack);
+					}
+					else
+					{
+						FlightTracks.Remove(oldTrack);
+						newTrack.HorizontalVelocity = _calculator.CalculateHorizontalVelocity(oldTrack.Position, newTrack.Position,
+							oldTrack.Timestamp, newTrack.Timestamp);
+						newTrack.CompassCourse = _calculator.CalculateCompassCourse(oldTrack.Position, newTrack.Position);
+						FlightTracks.Add(newTrack);
+					}
 				}
 				else
 				{
 					FlightTracks.Remove(oldTrack);
-					newTrack.HorizontalVelocity = _calculator.CalculateHorizontalVelocity(oldTrack.Position, newTrack.Position,
-						oldTrack.Timestamp, newTrack.Timestamp);
-					newTrack.CompassCourse = _calculator.CalculateCompassCourse(oldTrack.Position, newTrack.Position);
-					FlightTracks.Add(newTrack);
 				}
+				
 			}
 		}
 	}
