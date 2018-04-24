@@ -76,7 +76,7 @@ namespace SWT35_ATM_Handin3
 						{
 							if (_calculator.CalculateSeperation(trackOne.Position, trackTwo.Position))
 							{
-								var newSeperationEvent = new SeparationEvent(trackOne.Tag, trackTwo.Tag, DateTime.Now);
+								var newSeperationEvent = new SeparationEvent(trackOne.Tag, trackTwo.Tag, trackOne.Timestamp);
 								_seperationRepository.AddSeperationEvent(newSeperationEvent);
 								_logger.WriteToFile(newSeperationEvent.Tag1 + ";" + newSeperationEvent.Tag2 + ";" + newSeperationEvent.Time);
 							}

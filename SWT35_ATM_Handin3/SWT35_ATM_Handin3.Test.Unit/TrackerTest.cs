@@ -44,37 +44,5 @@ namespace SWT35_ATM_Handin3.Test.Unit
             _display.Received(1).Clear();
 		}
 
-		/*
-		[Test]
-		public void Initial_TransponderStringsChangedTwice_TrackFactoryCalledWithCorrectString()
-		{
-			var args = new RawTransponderDataEventArgs(_rawTranssponderData);
-			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-
-			//_trackfactory.Received(2).CreateTrack("test");
-		}
-
-		[Test]
-		public void Initial_TransponderStringsChangedOnce_NumberOfEventsCorrect()
-		{
-			var args = new RawTransponderDataEventArgs(_rawTranssponderData);
-
-			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-
-			Assert.That(_nEventsReceived, Is.EqualTo(1));
-		}
-
-		[Test]
-		public void Initial_TransponderStringsChangedTwice_NumberOfEventsCorrect()
-		{
-			var args = new RawTransponderDataEventArgs(_rawTranssponderData);
-
-			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-
-			Assert.That(_nEventsReceived, Is.EqualTo(2));
-		}
-		*/
 	}
 }

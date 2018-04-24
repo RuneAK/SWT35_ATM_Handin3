@@ -63,7 +63,8 @@ namespace SWT35_ATM_Handin3.Test.Integration
 
 			_transponderReceiver.TransponderDataReady += Raise.EventWith(args);
 
-			_display.Received(1).WriteRed("TestTag1/TestTag2 Time: 24-Apr-18 21:43:07");
+			_logger.Received(1).WriteToFile("TestTag1;TestTag2;31-Dec-00 23:59:59");
+			_display.Received(1).WriteRed("TestTag1/TestTag2 Time: 31-Dec-00 23:59:59");
 		}
 	}
 }
