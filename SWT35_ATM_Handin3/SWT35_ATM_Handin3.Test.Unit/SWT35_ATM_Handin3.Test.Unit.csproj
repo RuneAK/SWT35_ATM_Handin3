@@ -62,7 +62,7 @@
     <Compile Include="AirspaceTest.cs" />
     <Compile Include="CalculatorTest.cs" />
     <Compile Include="PointTest.cs" />
-    <Compile Include="SeparationEventRepositoryTest.cs" />
+    <Compile Include="SeparationRepositoryTest.cs" />
     <Compile Include="SeparationEventTest.cs" />
     <Compile Include="TrackerTest.cs" />
     <Compile Include="TrackFactoryTest.cs" />
