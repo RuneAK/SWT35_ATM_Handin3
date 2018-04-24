@@ -60,7 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airspace.cs" />
-    <Compile Include="Interfaces\ISeparationEvent.cs" />
+    <Compile Include="Interfaces\IAirspace.cs" />
+    <Compile Include="Interfaces\ISeperationRepository.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Display.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Interfaces\ITracks.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="SeparationEvent.cs" />
+    <Compile Include="SeparationRepository.cs" />
     <Compile Include="Tracks.cs" />
     <Compile Include="UpdateEventArgs.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />

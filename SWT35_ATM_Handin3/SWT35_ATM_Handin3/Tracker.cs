@@ -12,106 +12,84 @@ namespace SWT35_ATM_Handin3
 {
 	public class Tracker : ITracker
 	{
-		
-		private List<SeparationEvent> _separations = new List<SeparationEvent>();
-		private bool _currentSeparationEvent;
-		
+		private IAirspace _airspace;
+		private readonly ITracks _flightTracks;
 		private readonly ITrackFactory _trackFactory;
 		private readonly ICalculator _calculator;
-		private ITracks _flightTracks;
-		public event EventHandler<UpdateEventArgs> TracksUpdated;
-		public event EventHandler<SeparationEvent>SeparationsUpdated;
-
-		public Tracker(ITransponderReceiver transponderReceiver, ITrackFactory trackFactory, ICalculator calculator)
+	    private ISeperationRepository _seperationRepository;
+		private IDisplay _display;
+		private ILogger _logger;
+		
+		public Tracker(ITrackFactory trackFactory, ICalculator calculator, IDisplay display, ILogger logger)
 		{
-			_currentSeparationEvent = false;
+			_logger = logger;
+			_display = display;
+			_seperationRepository = new SeparationRepository();
 			_calculator = calculator;
 			_trackFactory = trackFactory;
-			_flightTracks = new Tracks(_calculator);
-			transponderReceiver.TransponderDataReady += Tracking;
+			_flightTracks = new Tracks(_calculator, new Airspace());
+			_trackFactory.TracksUpdated += Tracking;
 		}
 
-		private void Tracking(object o, RawTransponderDataEventArgs args)
+		private void Tracking(object o, UpdateEventArgs args)
 		{
-			ITracks newTracks = new Tracks(_calculator);
-
-			foreach (var info in args.TransponderData)
+			if (args.Tracks.FlightTracks.Count != 0)
 			{
-				var newTrack = _trackFactory.CreateTrack(info);
-				newTracks.Add(newTrack);
+				_flightTracks.Update(args.Tracks);
 			}
 
-			_flightTracks.Update(newTracks);
 			SeperationEvents();
+			
+			_display.Clear();
+			if (_seperationRepository.GetAll().Count != 0)
+			{
+				_display.WriteRed("Seperation Event(s):");
+				foreach (var var in _seperationRepository.GetAll())
+				{
+					_display.WriteRed(var.Tag1 + "/" + var.Tag2 + " Time: " + var.Time);
+				}
+			}
 
-			/* !!!Test!!!
-			var test1 = new Track();
-			test1.Tag = "Test1";
-			test1.Altitude = 100;
-			test1.Position = new Point(100,100);
-			var test2 = new Track();
-			test2.Tag = "Test2";
-			test2.Altitude = 200;
-			test2.Position = new Point(200,200);
-			newTracks.Add(test1);
-			newTracks.Add(test2);
-			*/
-
-			
-			
-			
-			
-			OnTracksUpdated(new UpdateEventArgs{Tracks = _flightTracks, SeparationEvents = _separations});
-			
+			if (_flightTracks.FlightTracks.Count != 0)
+			{
+				_display.Write("Tracks:");
+				foreach (var track in _flightTracks.FlightTracks)
+				{
+					_display.Write("Tag: " + track.Tag + " CurrentPosition: " + track.Position.X + "mE," + track.Position.Y +
+					               "mN Altitude: " + track.Position.Alt + "m HorizontalVelocity: " +
+					               Math.Round(track.HorizontalVelocity, 2) + "m/s CompassCourse: " +
+					               Math.Round(track.CompassCourse, 2) + "°");
+				}
+			}
+		
 		}
 
 		private void SeperationEvents()
 		{
-			foreach (var trackOne in _flightTracks.FlightTracks)
+			if (_flightTracks.FlightTracks.Count != 0)
 			{
-				foreach (var trackTwo in _flightTracks.FlightTracks)
+				foreach (var trackOne in _flightTracks.FlightTracks)
 				{
-					if (trackOne.Tag != trackTwo.Tag)
+					foreach (var trackTwo in _flightTracks.FlightTracks)
 					{
-						if (_calculator.CalculateSeperation(trackOne.Position, trackTwo.Position))
+						if (trackOne.Tag != trackTwo.Tag)
 						{
-							var newSeperationEvent = new SeparationEvent(trackOne.Tag, trackTwo.Tag, DateTime.Now);
-
-							if (_separations.Find(i => i.Tag1 == trackOne.Tag && i.Tag2 == trackTwo.Tag) == null && _separations.Find(i => i.Tag2 == trackOne.Tag && i.Tag1 == trackTwo.Tag) == null)
+							if (_calculator.CalculateSeperation(trackOne.Position, trackTwo.Position))
 							{
-								OnSeparationsUpdated(newSeperationEvent);
-								_separations.Add(newSeperationEvent);
+								var newSeperationEvent = new SeparationEvent(trackOne.Tag, trackTwo.Tag, DateTime.Now);
+								_seperationRepository.AddSeperationEvent(newSeperationEvent);
+								_logger.WriteToFile(newSeperationEvent.Tag1 + ";" + newSeperationEvent.Tag2 + ";" + newSeperationEvent.Time);
+							}
+							else
+							{
+								var tempSeparationEvent = _seperationRepository.Get(trackOne.Tag, trackTwo.Tag);
+								if(tempSeparationEvent != null)
+									_seperationRepository.DeleteSeperationEvent(tempSeparationEvent);
 							}
 						}
 					}
 				}
 			}
-
-			if (_separations.Any())
-			{
-				foreach (var se in _separations)
-				{
-					var track1 = _flightTracks.FlightTracks.Find(i => i.Tag == se.Tag1);
-					var track2 = _flightTracks.FlightTracks.Find(i => i.Tag == se.Tag2);
-					if (!_calculator.CalculateSeperation(track1.Position, track2.Position))
-					{
-						//remove me from list PLEASE!
-					}
-				}
-			}
 		}
-
-		private void OnTracksUpdated(UpdateEventArgs args)
-		{
-			var handler = TracksUpdated;
-			handler?.Invoke(this, args);
-		}
-
-		private void OnSeparationsUpdated(SeparationEvent args)
-		{
-			var handler = SeparationsUpdated;
-			handler?.Invoke(this, args);
-		}
-
 	}
 }

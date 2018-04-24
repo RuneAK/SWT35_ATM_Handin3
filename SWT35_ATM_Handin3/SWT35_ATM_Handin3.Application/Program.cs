@@ -13,11 +13,11 @@ namespace SWT35_ATM_Handin3.Application
 		static void Main(string[] args)
 		{
 			ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-			ITrackFactory trackFactory = new TrackFactory();
+			ITrackFactory trackFactory = new TrackFactory(transponderReceiver);
 			ICalculator calculator = new Calculator(300,5000);
-			ITracker tracker = new Tracker(transponderReceiver,trackFactory, calculator);
-			IDisplay display = new Display(tracker);
-			ILogger logger = new Logger(tracker,"Log.txt");
+			IDisplay display = new Display();
+			ILogger logger = new Logger();
+			ITracker tracker = new Tracker(trackFactory, calculator, display, logger);
 
 			Console.ReadLine();
 		}

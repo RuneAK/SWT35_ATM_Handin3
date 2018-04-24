@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SWT35_ATM_Handin3.Interfaces;
 
 namespace SWT35_ATM_Handin3
 {
-    public class Airspace
+    public class Airspace : IAirspace
     {
         public Point LowerBound { get; set; }
         public Point UpperBound { get; set; }

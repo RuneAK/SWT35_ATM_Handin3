@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SWT35_ATM_Handin3.Interfaces
 {
-	public interface ISeparationEvent
+	public interface IAirspace
 	{
-		string Tag1 { get; }
-		string Tag2 { get; }
-		DateTime Time { get; }
+		Point LowerBound { get; }
+		Point UpperBound { get; }
 	}
 }

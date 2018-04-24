@@ -6,23 +6,25 @@ using System.Threading.Tasks;
 using NSubstitute;
 using NUnit.Framework;
 using SWT35_ATM_Handin3.Interfaces;
+using TransponderReceiver;
 
 namespace SWT35_ATM_Handin3.Test.Unit
 {
     [TestFixture()]
     public class TracksTest
     {
-        private ICalculator _calculator;
+		private ICalculator _calculator;
+	    private IAirspace _airspace;
         private Tracks _uut;
-        private Track _track;
-        private TrackFactory _factory;
+        private ITrack _track;
 
         [SetUp]
         public void SetUp()
         {
-            _factory = new TrackFactory();
+	        _track = Substitute.For<ITrack>();
             _calculator = Substitute.For<ICalculator>();
-            _uut = new Tracks(_calculator);
+	        _airspace = Substitute.For<IAirspace>();
+            _uut = new Tracks(_calculator,_airspace);
         }
 
         [Test]
@@ -35,16 +37,21 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
         }
 
-
-        [TestCase("TAG12;43210;54321;12345;20000101235959999")]
-        public void Tracks_CanUpdate_Tracks(string tag)
+		
+        [Test]
+        public void Tracks_CanUpdate_Tracks()
         {
-            _track = _factory.CreateTrack(tag);
-            _uut.FlightTracks.Add(_track);
-            _uut.Update(_uut);
+
+			//Setup additional Tracks object
+			var testTracks = new Tracks();
+			testTracks.FlightTracks.Add(_track);
+
+			//Act
+            _uut.Update(testTracks);
 
             // Assert
-            Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
-        }              
+            _calculator.Received(1).CalculateWithinAirspace(_track.Position,null,null);
+        }
+		
     }
 }
