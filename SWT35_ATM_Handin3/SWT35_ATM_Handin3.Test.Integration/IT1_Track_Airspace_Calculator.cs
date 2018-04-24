@@ -14,7 +14,10 @@ namespace SWT35_ATM_Handin3.Test.Integration
     {
         //Stubs
 
+        //Real
+
         //Units under test
+        private
 
         [SetUp]
         public void SetUp()
