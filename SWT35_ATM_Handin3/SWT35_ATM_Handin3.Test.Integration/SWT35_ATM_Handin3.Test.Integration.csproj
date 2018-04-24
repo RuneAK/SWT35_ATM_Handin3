@@ -59,7 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IT1_Point.cs" />
+    <Compile Include="IT1_Track_Airspace_Calculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
