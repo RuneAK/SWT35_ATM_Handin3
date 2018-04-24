@@ -12,7 +12,7 @@ using TransponderReceiver;
 namespace SWT35_ATM_Handin3.Test.Integration
 {
     [TestFixture]
-    public class IT2_TrackFactory
+    public class IT2_Tracker
     {
         //Real
         private ICalculator _calculator;
