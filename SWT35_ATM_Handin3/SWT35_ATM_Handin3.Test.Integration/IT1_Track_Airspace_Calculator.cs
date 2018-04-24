@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace SWT35_ATM_Handin3.Test.Integration
 {
     [TestFixture]
-    public class IT1_Point
+    public class IT1_Track_Airspace_Calculator
     {
         //Stubs
 
