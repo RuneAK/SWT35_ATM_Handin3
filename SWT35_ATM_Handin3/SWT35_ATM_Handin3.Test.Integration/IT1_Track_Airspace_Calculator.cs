@@ -47,9 +47,10 @@ namespace SWT35_ATM_Handin3.Test.Integration
         }
 
         [Test]
-        public void FirstFunctionToTest()
+        public void T_NewTransponderData_NewTracksCalled()
         {
-
+            //Generate transponderdata
+            //Check track how?
         }
     }
 }
