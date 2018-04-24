@@ -26,33 +26,22 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		[SetUp]
 		public void SetUp()
 		{
-			_nEventsReceived = 0;
 			_display = Substitute.For<IDisplay>();
 			_trackfactory = Substitute.For<ITrackFactory>();
 			_calculator = Substitute.For<ICalculator>();
 			_logger = Substitute.For<ILogger>();
 
-			var testTrack = new Track();
-			testTrack.Tag = "TestTag";
-			testTrack.Position = new Point(12345, 12345, 12345);
-			testTrack.Timestamp = new DateTime(2000, 1, 1, 23, 59, 59, 999);
-
-			_testTrackEvent = new UpdateEventArgs();
-			_testTrackEvent.Tracks = new Tracks();
-			_testTrackEvent.Tracks.Add(testTrack);
-
-			_uut = new Tracker(_trackfactory, _calculator, _display, _logger);
-			
+		    _testTrackEvent = new UpdateEventArgs();
+            _testTrackEvent.Tracks = new Tracks();
+            
+			_uut = new Tracker(_trackfactory, _calculator, _display, _logger);			
 		}
 		
 		[Test]
-		public void Initial_TrackFactoryTracksUpdated_TracksUpdatedCorrectly()
+		public void Test_TrackFactoryRaisesEvent_TrackingIsCalled()
 		{
-			
-			_trackfactory.TracksUpdated += Raise.EventWith(_testTrackEvent);
-
-			Assert.That(_nEventsReceived, Is.EqualTo(1));
-			Assert.That(_tracks.FlightTracks[0], Is.EqualTo(_testTrackEvent.Tracks.FlightTracks[0]));
+			_trackfactory.TracksUpdated += Raise.EventWith(_testTrackEvent);           
+            _display.Received(1).Clear();
 		}
 
 		/*
