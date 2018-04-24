@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="IT1_Tracks.cs" />
     <Compile Include="IT2_TrackFactory.cs" />
-    <Compile Include="IT3_Tracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
