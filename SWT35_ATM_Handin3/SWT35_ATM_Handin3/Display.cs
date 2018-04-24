@@ -9,15 +9,10 @@ namespace SWT35_ATM_Handin3
 {
 	public class Display : IDisplay
 	{
-		public Display(ITracker tracker)
+		public void Write(string output)
 		{
-			tracker.TracksUpdated += WriteToConsole;
-		}
-
-		private void WriteToConsole(object o, UpdateEventArgs args)
-		{
-			Console.Clear();
-
+			Console.WriteLine(output);
+			/*
 			if (args.SeparationEvents.Count != 0)
 			{
 				Console.BackgroundColor = ConsoleColor.Red;
@@ -41,6 +36,22 @@ namespace SWT35_ATM_Handin3
 				                  Math.Round(track.HorizontalVelocity, 2) + "m/s CompassCourse: " +
 				                  Math.Round(track.CompassCourse, 2) + "°");
 			}
+			*/
+		}
+
+		public void WriteRed(string output)
+		{
+			Console.BackgroundColor = ConsoleColor.Red;
+			Console.ForegroundColor = ConsoleColor.Black;
+
+			Console.WriteLine(output);
+
+			Console.ResetColor();
+		}
+
+		public void Clear()
+		{
+			Console.Clear();
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace SWT35_ATM_Handin3
 				newTracks.Add(CreateTrack(str));
 			}
 
-			TransponderUpdated(new UpdateEventArgs { Tracks = newTracks, SeparationEvents = null });
+			TransponderUpdated(new UpdateEventArgs { Tracks = newTracks});
 		}
 
 		public Track CreateTrack(string info)

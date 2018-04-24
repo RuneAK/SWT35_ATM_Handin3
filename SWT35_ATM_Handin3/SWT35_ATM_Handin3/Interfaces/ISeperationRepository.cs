@@ -13,5 +13,6 @@ namespace SWT35_ATM_Handin3.Interfaces
         void DeleteSeperationEvent(SeparationEvent e);
 
         SeparationEvent Get(string tag1, string tag2);
+	    List<SeparationEvent> GetAll();
     }
 }
