@@ -50,8 +50,8 @@ namespace SWT35_ATM_Handin3.Test.Unit
             _uut.Update(testTracks);
 
             // Assert
-            Assert.That(_uut.FlightTracks.Contains(_track), Is.True);
-		}
+            _calculator.Received(1).CalculateWithinAirspace(_track.Position,null,null);
+        }
 		
     }
 }

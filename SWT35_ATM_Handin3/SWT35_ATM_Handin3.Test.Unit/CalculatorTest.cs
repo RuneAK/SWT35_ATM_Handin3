@@ -32,7 +32,9 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		[TestCase(2, 1, 1, 1, 270)]
 		[TestCase(1, 2, 1, 1, 180)]
 		[TestCase(1, 1, 2, 2, 45)]
+		[TestCase(1, 2, 2, 1, 135)]
 		[TestCase(2, 2, 1, 1, 225)]
+		[TestCase(2, 1, 1, 2, 315)]
 		public void Test_CalculateCompassCourse_CalculationCorrect(int x1, int y1, int x2, int y2, double compasscourse)
 		{
 			Assert.That(_uut.CalculateCompassCourse(new Point(x1, y1, 0), new Point(x2, y2, 0)), Is.EqualTo(compasscourse));
@@ -47,6 +49,21 @@ namespace SWT35_ATM_Handin3.Test.Unit
 		public void Test_CalculateSeperation_CorrectTrueOrFalse(int x1, int y1, int alt1, int x2, int y2, int alt2, bool seperation)
 		{
 			Assert.That(_uut.CalculateSeperation(new Point(x1, y1, alt1), new Point(x2, y2, alt2)), Is.EqualTo(seperation));
+		}
+
+		[TestCase(10000, 10000, 500, 10000, 10000, 500, 90000, 90000, 20000, true)]
+		[TestCase(90000, 90000, 20000, 10000, 10000, 500, 90000, 90000, 20000, true)]
+		[TestCase(9999, 9999, 499, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(90001, 90001, 20001, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(50000, 90001, 10000, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(90001, 50000, 10000, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(50000, 50000, 200001, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(50000, 9999, 10000, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(9999, 50000, 10000, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		[TestCase(50000, 50000, 499, 10000, 10000, 500, 90000, 90000, 20000, false)]
+		public void Test_CalculateWithInAirspace_CorrectTrueOrFalse(int x0, int y0, int alt0, int x1, int y1, int alt1, int x2, int y2, int alt2, bool withinairspace)
+		{
+			Assert.That(_uut.CalculateWithinAirspace(new Point(x0, y0, alt0), new Point(x1, y1, alt1), new Point(x2, y2, alt2)), Is.EqualTo(withinairspace));
 		}
 	}
 }
