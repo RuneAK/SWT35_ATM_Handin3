@@ -36,7 +36,7 @@ namespace SWT35_ATM_Handin3.Test.Integration
 			}
 
 			[Test]
-			public void Update_TracksUpdatedCorrectly()
+			public void Update_OneTrackUpdatedCorrectly()
 			{
 				_testTrack1 = new Track
 				{
