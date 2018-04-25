@@ -17,11 +17,13 @@ namespace SWT35_ATM_Handin3.Test.Unit
 	    private IAirspace _airspace;
         private Tracks _uut;
         private ITrack _track;
+        private ITrack _track2;
 
         [SetUp]
         public void SetUp()
         {
 	        _track = Substitute.For<ITrack>();
+            _track2 = Substitute.For<ITrack>();
             _calculator = Substitute.For<ICalculator>();
 	        _airspace = Substitute.For<IAirspace>();
             _uut = new Tracks(_calculator,_airspace);
@@ -52,6 +54,24 @@ namespace SWT35_ATM_Handin3.Test.Unit
             // Assert
             _calculator.Received(1).CalculateWithinAirspace(_track.Position,null,null);
         }
-		
+
+        /*
+        [Test]
+        public void Tracks_CanUpdate_FlightTracksAddCalled()
+        {
+
+            //Setup additional Tracks object
+            var testTracks = new Tracks();
+            testTracks.FlightTracks.Add(_track);
+            testTracks.FlightTracks.Add(_track2);
+
+            //Act
+            _uut.Update(testTracks);
+
+            // Assert
+            _calculator.Received(2).CalculateHorizontalVelocity();
+            */
+        }
+
     }
 }
