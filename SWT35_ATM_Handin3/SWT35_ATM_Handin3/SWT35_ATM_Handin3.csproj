@@ -59,31 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Airspace.cs" />
-    <Compile Include="Interfaces\IAirspace.cs" />
-    <Compile Include="Interfaces\ISeperationRepository.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Calculator.cs" />
-    <Compile Include="Display.cs" />
-    <Compile Include="Interfaces\ILogger.cs" />
-    <Compile Include="Interfaces\ICalculator.cs" />
-    <Compile Include="Interfaces\ITrack.cs" />
-    <Compile Include="Interfaces\ITracks.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="SeparationEvent.cs" />
-    <Compile Include="SeparationRepository.cs" />
-    <Compile Include="Tracks.cs" />
-    <Compile Include="UpdateEventArgs.cs" />
-    <Compile Include="Interfaces\IDisplay.cs" />
-    <Compile Include="Interfaces\ITracker.cs" />
-    <Compile Include="Interfaces\ITrackFactory.cs" />
-    <Compile Include="Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tracker.cs" />
-    <Compile Include="TrackFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
