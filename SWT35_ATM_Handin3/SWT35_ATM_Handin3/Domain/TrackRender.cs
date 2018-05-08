@@ -27,7 +27,7 @@ namespace SWT35_ATM_Handin3.Domain
 				           track.Position.Y +
 				           "mN Altitude: " + track.Position.Altitude + "m Velocity: " +
 				           Math.Round(track.Velocity, 2) + "m/s Course: " +
-				           Math.Round(track.Course, 2) + "°");
+				           Math.Round(track.Course, 2) + "°";
 				_display.Write(str);
 			}
 		}
