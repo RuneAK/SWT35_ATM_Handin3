@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SWT35_ATM_Handin3.Boundary;
 
 namespace SWT35_ATM_Handin3.Interfaces
 {
-	interface IFactory
+	public interface IFactory
 	{
+		event EventHandler<EventTracks> TracksReady;
 	}
 }

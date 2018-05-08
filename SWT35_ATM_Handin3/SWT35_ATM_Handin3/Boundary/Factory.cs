@@ -11,7 +11,7 @@ namespace SWT35_ATM_Handin3.Boundary
 {
 	public class Factory : IFactory
 	{
-		public EventHandler<EventTracks> TracksReady;
+		public event EventHandler<EventTracks> TracksReady;
 		public Factory(ITransponderReceiver transponderReceiver)
 		{
 			transponderReceiver.TransponderDataReady += CreateTracks;
