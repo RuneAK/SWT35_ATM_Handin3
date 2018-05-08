@@ -7,7 +7,7 @@ using SWT35_ATM_Handin3.Interfaces;
 
 namespace SWT35_ATM_Handin3.Domain
 {
-	class SeparationRender : ISeparationRender
+	public class SeparationRender : ISeparationRender
 	{
 		private IDisplay _display;
 		public SeparationRender(ISeparationDetector detector, IDisplay display)
