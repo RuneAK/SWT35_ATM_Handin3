@@ -10,15 +10,50 @@ namespace SWT35_ATM_Handin3.Domain
 {
 	public class SeparationDetector : ISeparationDetector
 	{
+		private List<ISeparation> _oldSeparations;
+		private ILogger _logger;
+		public event EventHandler<EventSeparation> SeparationsUpdated;
 
-		public SeparationDetector(IUpdate update)
+		public SeparationDetector(IUpdate update, ILogger logger)
 		{
+			_logger = logger;
+			_oldSeparations = new List<ISeparation>();
 			update.TracksUpdated += DetectSeparations;
 		}
 
-		private void DetectSeparations(object sender, EventTracks eventTracks)
+		private void DetectSeparations(object sender, EventTracks e)
 		{
-			throw new NotImplementedException();
+			var updatedSeparations = new List<ISeparation>();
+
+			foreach (var trackOne in e.TrackData)
+			{
+				foreach (var trackTwo in e.TrackData)
+				{
+					if (trackOne.Tag != trackTwo.Tag)
+					{
+						if (CalculateSeparation(trackOne.Position, trackTwo.Position))
+						{
+							updatedSeparations.Add(new Separation(trackOne.Tag, trackTwo.Tag, trackOne.Timestamp));
+						}
+					}
+				}
+			}
+
+			foreach (var sep in updatedSeparations)
+			{
+				var oldSeparation = _oldSeparations.FirstOrDefault(s => s.Tag1 == sep.Tag1 && s.Tag2 == sep.Tag2);
+				if (oldSeparation == null)
+					_logger.Log(sep.Tag1 + ";" + sep.Tag2 + ";" + sep.TimeStamp);
+
+			}
+
+			_oldSeparations = updatedSeparations;
+			UpdatedSeparationEvent(new EventSeparation(updatedSeparations));
+		}
+
+		protected  virtual void UpdatedSeparationEvent(EventSeparation e)
+		{
+			SeparationsUpdated?.Invoke(this, e);
 		}
 
 		private bool CalculateSeparation(Point trackOne, Point trackTwo)
