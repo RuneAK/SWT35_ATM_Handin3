@@ -32,13 +32,9 @@ namespace SWT35_ATM_Handin3.Domain
 						track.Course = CalculateCourse(oldTrack.Position, track.Position);
 						track.Velocity = CalculateVelocity(oldTrack.Position, track.Position, oldTrack.Timestamp, track.Timestamp);
 					}
-					else
-					{
-						updatedTracks.Add(track);
-					}
-				}
+				    updatedTracks.Add(track);
+                }
 			}
-
 			_oldTracks = updatedTracks;
 			UpdatedTrackEvent(new EventTracks(updatedTracks));
 			
