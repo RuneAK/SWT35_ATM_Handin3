@@ -6,10 +6,10 @@ namespace SWT35_ATM_Handin3.Boundary
 {
 	public class EventTracks : EventArgs
 	{
+		public List<ITrack> TrackData;
 		public EventTracks(List<ITrack> trackData)
 		{
 			TrackData = trackData;
 		}
-		public List<ITrack> TrackData;
 	}
 }

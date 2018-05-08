@@ -59,8 +59,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boundary\Display.cs" />
+    <Compile Include="Interfaces\ISeparationRender.cs" />
+    <Compile Include="Domain\SeparationRender.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Boundary\Logger.cs" />
     <Compile Include="Domain\Airspace.cs" />
     <Compile Include="Domain\Filter.cs" />
+    <Compile Include="Domain\Separation.cs" />
+    <Compile Include="EventSeparation.cs" />
+    <Compile Include="Interfaces\ISeparationDetector.cs" />
+    <Compile Include="Domain\SeparationDetector.cs" />
+    <Compile Include="Interfaces\IDisplay.cs" />
+    <Compile Include="Interfaces\ITrackRender.cs" />
+    <Compile Include="Domain\TrackRender.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Domain\Update.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
@@ -71,6 +83,7 @@
     <Compile Include="Interfaces\IFactory.cs" />
     <Compile Include="Interfaces\IPoint.cs" />
     <Compile Include="Interfaces\ITrack.cs" />
+    <Compile Include="Interfaces\ISeparation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Track.cs" />
   </ItemGroup>
