@@ -67,6 +67,14 @@ namespace SWT35_ATM_Handin3.Test.Unit
         }
 
         [TestCase(0, 0, 0, double.NaN)]
+        [TestCase(0, 1, 0, 0)]
+        [TestCase(1, 0, 0, 90)]
+        [TestCase(0, -1, 0, 180)]
+        [TestCase(-1, 0, 0, 270)]
+        [TestCase(1, 1, 0, 45)]
+        [TestCase(1, -1, 0, 135)]
+        [TestCase(-1, -1, 0, 225)]
+        [TestCase(-1, 1, 0, 315)]
         public void CalculateCourse_ListOfTracksAlreadyOnOldTracks_CourseIsCorrect(int x1, int y1, int alt1, double course)
         {
             //Arrange
@@ -94,6 +102,41 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_trackList.Count(), Is.EqualTo(1));
             Assert.That(_trackList.Contains(trackOne), Is.True);
             Assert.That(_trackList[0].Course, Is.EqualTo(course));
+        }
+
+        [TestCase(0, 1, 0, 1, 2, 1)]
+        [TestCase(1, 0, 0, 1, 2, 1)]
+        [TestCase(0, 2, 0, 1, 2, 2)]
+        [TestCase(2, 0, 0, 1, 2, 2)]
+        [TestCase(0, 4, 0, 1, 5, 1)]
+        [TestCase(4, 0, 0, 1, 5, 1)]
+        public void CalculateVelocity_ListOfTracksAlreadyOnOldTracks_VelocityIsCorrect(int x, int y, int alt, int time1, int time2, double velocity)
+        {
+            //Arrange
+            var trackOne = new Track("one", _withinOne, new DateTime(2000, 1, 1, 1, 1, time1));
+            var trackList = new List<ITrack>();
+            trackList.Add(trackOne);
+            var args = new EventTracks(trackList);
+
+            //Act
+            _filter.TracksFiltered += Raise.EventWith(args);
+
+            //Arrange again
+            trackList.Remove(trackOne);
+            _withinOne.X = _withinOne.X + x;
+            _withinOne.Y = _withinOne.Y + y;
+            _withinOne.Altitude = _withinOne.Altitude + alt;
+            trackOne = new Track("one", _withinOne, new DateTime(2000, 1, 1, 1, 1, time2));
+            trackList.Add(trackOne);
+            args = new EventTracks(trackList);
+
+            //Act again
+            _filter.TracksFiltered += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_trackList.Count(), Is.EqualTo(1));
+            Assert.That(_trackList.Contains(trackOne), Is.True);
+            Assert.That(_trackList[0].Velocity, Is.EqualTo(velocity));
         }
     }
 }
