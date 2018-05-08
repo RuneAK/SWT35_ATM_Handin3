@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Domain\Airspace.cs" />
     <Compile Include="Domain\Filter.cs" />
+    <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Domain\Update.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Domain\Point.cs" />
     <Compile Include="EventTracks.cs" />
