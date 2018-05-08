@@ -65,5 +65,35 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_trackList.Contains(trackOne));
             Assert.That(_trackList.Contains(trackTwo));
         }
+
+        [TestCase(0, 0, 0, double.NaN)]
+        public void CalculateCourse_ListOfTracksAlreadyOnOldTracks_CourseIsCorrect(int x1, int y1, int alt1, double course)
+        {
+            //Arrange
+            var trackOne = new Track("one", _withinOne,  DateTime.Now);
+            var trackList = new List<ITrack>();
+            trackList.Add(trackOne);
+            var args = new EventTracks(trackList);
+
+            //Act
+            _filter.TracksFiltered += Raise.EventWith(args);
+
+            //Arrange again
+            trackList.Remove(trackOne);
+            _withinOne.X = _withinOne.X + x1;
+            _withinOne.Y = _withinOne.Y + y1;
+            _withinOne.Altitude = _withinOne.Altitude + alt1;
+            trackOne = new Track("one", _withinOne, DateTime.Now);
+            trackList.Add(trackOne);
+            args = new EventTracks(trackList);
+
+            //Act again
+            _filter.TracksFiltered += Raise.EventWith(args);
+
+            //Assert
+            Assert.That(_trackList.Count(), Is.EqualTo(1));
+            Assert.That(_trackList.Contains(trackOne), Is.True);
+            Assert.That(_trackList[0].Course, Is.EqualTo(course));
+        }
     }
 }
