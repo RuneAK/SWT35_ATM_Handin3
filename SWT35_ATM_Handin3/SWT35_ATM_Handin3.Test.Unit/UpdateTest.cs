@@ -76,7 +76,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         [TestCase(1, -1, 0, 135)]
         [TestCase(-1, -1, 0, 225)]
         [TestCase(-1, 1, 0, 315)]
-		public void CalculateCourse_ListOfTracksAlreadyOnOldTracks_CourseIsCorrect(int x1, int y1, int alt1, double course)
+		public void CalculateCourse_ListOfTracksAlreadyOnOldTracks_CourseIsCorrect(int x, int y, int alt, double course)
         {
             //Arrange
             var trackOne = new Track("one", _withinOne,  DateTime.Now);
@@ -88,7 +88,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
             _filter.TracksFiltered += Raise.EventWith(args);
 
             //Arrange again
-			trackOne = new Track("one", new Point(_withinOne.X+x1, _withinOne.Y+y1, _withinOne.Altitude), DateTime.Now);
+			trackOne = new Track("one", new Point(_withinOne.X+x, _withinOne.Y+y, _withinOne.Altitude+alt), DateTime.Now);
 			trackList = new List<ITrack>();
             trackList.Add(trackOne);
             args = new EventTracks(trackList);
@@ -100,8 +100,6 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_trackList.Count(), Is.EqualTo(1));
             Assert.That(_trackList.Contains(trackOne), Is.True);
             Assert.That(_trackList[0].Course, Is.EqualTo(course));
-			//Uncomment her for at se mit problem (Kan det ikke slettes? det ovenfor er det samme)
-			//Assert.That(_trackList.Find(trackOne).Course, Is.EqualTo(course));
 		}
 
 		[TestCase(0, 1, 0, 1, 2, 1)]
@@ -122,8 +120,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
             _filter.TracksFiltered += Raise.EventWith(args);
 
             //Arrange again
-            _withinOne.Altitude = _withinOne.Altitude + alt;
-            trackOne = new Track("one", new Point(_withinOne.X +x, _withinOne.Y+y, _withinOne.Altitude), new DateTime(2000, 1, 1, 1, 1, time2));
+            trackOne = new Track("one", new Point(_withinOne.X+x, _withinOne.Y+y, _withinOne.Altitude+alt), new DateTime(2000, 1, 1, 1, 1, time2));
 			trackList = new List<ITrack>();
             trackList.Add(trackOne);
             args = new EventTracks(trackList);
@@ -135,8 +132,6 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_trackList.Count(), Is.EqualTo(1));
             Assert.That(_trackList.Contains(trackOne), Is.True);
             Assert.That(_trackList[0].Velocity, Is.EqualTo(velocity));
-            //Uncomment her for at se mit problem (Kan det ikke slettes? det ovenfor er det samme)
-            //Assert.That(_trackList.Find(trackOne).Velocity, Is.EqualTo(velocity));
         }
 	}
 }
