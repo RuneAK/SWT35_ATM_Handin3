@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SWT35_ATM_Handin3.Interfaces;
 
-namespace SWT35_ATM_Handin3.Boundary
+namespace SWT35_ATM_Handin3
 {
 	public class EventTracks : EventArgs
 	{
