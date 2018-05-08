@@ -22,8 +22,6 @@ namespace SWT35_ATM_Handin3.Domain
 		{
 			var updatedTracks = new List<ITrack>();
 
-			if (e.TrackData.Any())
-			{
 				foreach (var track in e.TrackData)
 				{
 					var oldTrack = _oldTracks.FirstOrDefault(t => t.Tag == track.Tag);
@@ -34,10 +32,9 @@ namespace SWT35_ATM_Handin3.Domain
 					}
 				    updatedTracks.Add(track);
                 }
-			}
+
 			_oldTracks = updatedTracks;
 			UpdatedTrackEvent(new EventTracks(updatedTracks));
-			
 		}
 
 		protected virtual void UpdatedTrackEvent(EventTracks e)
