@@ -59,8 +59,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boundary\Display.cs" />
     <Compile Include="Domain\Airspace.cs" />
     <Compile Include="Domain\Filter.cs" />
+    <Compile Include="Interfaces\ISeparationDetector.cs" />
+    <Compile Include="Domain\SeparationDetector.cs" />
+    <Compile Include="Interfaces\IDisplay.cs" />
+    <Compile Include="Interfaces\ITrackRender.cs" />
+    <Compile Include="Domain\TrackRender.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Domain\Update.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
