@@ -35,7 +35,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         }
 
         [Test]
-        private void RenderTracks_ATrack_DisplayFunctionsCalled()
+        public void RenderTracks_ATrack_DisplayFunctionsCalled()
         {
 
         }
