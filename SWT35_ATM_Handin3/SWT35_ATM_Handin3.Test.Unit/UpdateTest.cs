@@ -102,6 +102,8 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_trackList.Count(), Is.EqualTo(1));
             Assert.That(_trackList.Contains(trackOne), Is.True);
             Assert.That(_trackList[0].Course, Is.EqualTo(course));
+            //Uncomment her for at se mit problem
+            //Assert.That(_trackList.Find(trackOne).Course, Is.EqualTo(course));
         }
 
         [TestCase(0, 1, 0, 1, 2, 1)]
@@ -137,6 +139,8 @@ namespace SWT35_ATM_Handin3.Test.Unit
             Assert.That(_trackList.Count(), Is.EqualTo(1));
             Assert.That(_trackList.Contains(trackOne), Is.True);
             Assert.That(_trackList[0].Velocity, Is.EqualTo(velocity));
+            //Uncomment her for at se mit problem
+            //Assert.That(_trackList.Find(trackOne).Velocity, Is.EqualTo(velocity));
         }
     }
 }
