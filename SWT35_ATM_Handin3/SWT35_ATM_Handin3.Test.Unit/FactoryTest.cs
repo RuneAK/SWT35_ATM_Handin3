@@ -15,8 +15,11 @@ namespace SWT35_ATM_Handin3.Test.Unit
     [TestFixture()]
     public class FactoryTest
     {
+        //Stubs
         private ITransponderReceiver _transponderReceiver;
+        //Unit under test
         private Factory _uut;
+        //Fields
         private List<ITrack> _trackList;
         private int _nEventsReceived;
 
