@@ -11,8 +11,5 @@ namespace SWT35_ATM_Handin3.Interfaces
 	public interface IFactory
 	{
 		event EventHandler<EventTracks> TracksReady;
-
-	    void CreateTracks(object sender, RawTransponderDataEventArgs e)
-
     }
 }
