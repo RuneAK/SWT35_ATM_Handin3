@@ -14,6 +14,7 @@ namespace SWT35_ATM_Handin3.Domain
 		private List<ITrack> _oldTracks;
 		public Update(IFilter filter)
 		{
+            _oldTracks = new List<ITrack>();
 			filter.TracksFiltered += UpdateTracks;
 		}
 
