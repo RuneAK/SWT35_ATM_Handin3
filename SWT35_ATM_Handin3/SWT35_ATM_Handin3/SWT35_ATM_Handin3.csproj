@@ -78,7 +78,7 @@
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Domain\Point.cs" />
     <Compile Include="EventTracks.cs" />
-    <Compile Include="Boundary\Factory.cs" />
+    <Compile Include="Domain\Factory.cs" />
     <Compile Include="Interfaces\IAirspace.cs" />
     <Compile Include="Interfaces\IFactory.cs" />
     <Compile Include="Interfaces\IPoint.cs" />

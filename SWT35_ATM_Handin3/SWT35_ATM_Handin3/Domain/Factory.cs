@@ -7,7 +7,7 @@ using SWT35_ATM_Handin3.Domain;
 using SWT35_ATM_Handin3.Interfaces;
 using TransponderReceiver;
 
-namespace SWT35_ATM_Handin3.Boundary
+namespace SWT35_ATM_Handin3.Domain
 {
 	public class Factory : IFactory
 	{

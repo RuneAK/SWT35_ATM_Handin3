@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SWT35_ATM_Handin3.Boundary;
+using SWT35_ATM_Handin3.Domain;
 using TransponderReceiver;
 
 namespace SWT35_ATM_Handin3.Interfaces

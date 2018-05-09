@@ -7,6 +7,7 @@ using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using SWT35_ATM_Handin3.Boundary;
+using SWT35_ATM_Handin3.Domain;
 using SWT35_ATM_Handin3.Interfaces;
 using TransponderReceiver;
 
