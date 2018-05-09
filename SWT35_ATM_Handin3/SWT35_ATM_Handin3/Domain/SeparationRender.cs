@@ -12,6 +12,7 @@ namespace SWT35_ATM_Handin3.Domain
 		private IDisplay _display;
 		public SeparationRender(ISeparationDetector detector, IDisplay display)
 		{
+		    _display = display;
 			detector.SeparationsUpdated += RenderSeparations;
 		}
 

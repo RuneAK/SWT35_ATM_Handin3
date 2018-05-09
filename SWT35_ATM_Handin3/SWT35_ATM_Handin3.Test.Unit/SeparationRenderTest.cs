@@ -34,7 +34,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 			//Unit under test
 			_uut = new SeparationRender(_separationDetector, _display);
         }
-		/*
+		
 		[Test]
 		public void RenderSeparations_ASeparation_DisplayFunctionsCalled()
 		{
@@ -53,7 +53,6 @@ namespace SWT35_ATM_Handin3.Test.Unit
 			_display.Received(1).Write("***Separations***");
 			_display.Received(1).Write($"Tag1: " + separationOne.Tag1 + " Tag2: " + separationOne.Tag2 + separationOne.TimeStamp);
 			_display.Received(1).Write($"Tag1: " + separationTwo.Tag1 + " Tag2: " + separationTwo.Tag2 + separationTwo.TimeStamp);
-		}
-		*/
+		}		
 	}
 }
