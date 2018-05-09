@@ -67,6 +67,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
         }
 
         [TestCase(10000, 10000, 10000, 20000, 20000, 20000, "one", "two")]
+        [TestCase(10000, 10000, 15000, 20000, 20000, 15000, "one", "two")]
         public void DetectSeparation_TwoTracksCausingNoSeparation_CalculateSeparationFalse(int x1, int y1, int alt1, int x2, int y2, int alt2, string tag1, string tag2)
         {
             //Arrange
@@ -84,12 +85,6 @@ namespace SWT35_ATM_Handin3.Test.Unit
 
             //Assert
             Assert.That(_separationData.Count, Is.EqualTo(0));
-        }
-
-        [TestCase()]
-        public void DetectSeparation_TwoTracksCausingSeparation_CalculateSeparationTrue()
-        {
-
         }
     }
 }
