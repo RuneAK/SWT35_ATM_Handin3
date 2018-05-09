@@ -33,7 +33,9 @@ namespace SWT35_ATM_Handin3.Domain
 					{
 						if (CalculateSeparation(trackOne.Position, trackTwo.Position))
 						{
-							updatedSeparations.Add(new Separation(trackOne.Tag, trackTwo.Tag, trackOne.Timestamp));
+							var oldSeparations = updatedSeparations.FirstOrDefault(s => s.Tag1 == trackOne.Tag || s.Tag2 == trackOne.Tag);
+							if (oldSeparations == null)
+								updatedSeparations.Add(new Separation(trackOne.Tag, trackTwo.Tag, trackOne.Timestamp));
 						}
 					}
 				}
