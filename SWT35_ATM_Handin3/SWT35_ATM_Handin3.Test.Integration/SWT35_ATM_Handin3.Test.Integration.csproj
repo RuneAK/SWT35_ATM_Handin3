@@ -63,6 +63,7 @@
     <Compile Include="IT2_Update-Filter.cs" />
     <Compile Include="IT3_SeparationDetector-Update-Logger.cs" />
     <Compile Include="IT4_TrackRender-Update-Display.cs" />
+    <Compile Include="IT5_SeparationRender-SeparationDetector-Display.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
