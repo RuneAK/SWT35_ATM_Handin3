@@ -105,5 +105,41 @@ namespace SWT35_ATM_Handin3.Test.Unit
 	        Assert.That(_separationData.Any(), Is.EqualTo(separation));
 	        Assert.That(_separationData.Count(), Is.EqualTo(1));
 		}
-    }
+
+	    [TestCase(0, 0, 300, true, 0,0,301, false)]
+	    [TestCase(0, 5000, 0, true, 0, 5001, 0, false)]
+	    [TestCase(5000, 0, 0, true, 5001, 0, 0, false)]
+	    public void DetectSeparation_TwoTracksNoLongerCausingSeparation_RemovedFromList(int x1, int y1, int alt1, bool separation1, int x2, int y2, int alt2, bool separation2)
+	    {
+		    //Arrange
+		    var trackOne = new Track("one", _point, new DateTime(2000, 12, 31, 23, 59, 59));
+		    var trackTwo = new Track("two", new Point(_point.X + x1, _point.Y + y1, _point.Altitude + alt1), new DateTime(2000, 12, 31, 23, 59, 59));
+		    var trackList = new List<ITrack>();
+		    trackList.Add(trackOne);
+		    trackList.Add(trackTwo);
+		    var args = new EventTracks(trackList);
+
+		    //Act
+		    _update.TracksUpdated += Raise.EventWith(args);
+
+		    //Assert
+		    Assert.That(_separationData.Any(), Is.EqualTo(separation1));
+		    Assert.That(_separationData.Count(), Is.EqualTo(1));
+
+			//Re-Arrange
+		    trackOne = new Track("one", _point, new DateTime(2000, 12, 31, 23, 59, 59));
+		    trackTwo = new Track("two", new Point(_point.X + x2, _point.Y + y2, _point.Altitude + alt2), new DateTime(2000, 12, 31, 23, 59, 59));
+		    trackList = new List<ITrack>();
+		    trackList.Add(trackOne);
+		    trackList.Add(trackTwo);
+		    args = new EventTracks(trackList);
+
+		    //Re-Act
+		    _update.TracksUpdated += Raise.EventWith(args);
+
+		    //Re-Assert
+		    Assert.That(_separationData.Any(), Is.EqualTo(separation2));
+		    Assert.That(_separationData.Count(), Is.EqualTo(0));
+		}
+	}
 }
