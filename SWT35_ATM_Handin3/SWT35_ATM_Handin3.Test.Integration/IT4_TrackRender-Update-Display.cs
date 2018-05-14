@@ -28,7 +28,6 @@ namespace SWT35_ATM_Handin3.Test.Integration
 		private IAirspace _airspace;
 		private IFactory _factory;
 		private IUpdate _update;
-		private int _nEventReceived;
 
 		[SetUp]
 		public void SetUp()
@@ -66,7 +65,6 @@ namespace SWT35_ATM_Handin3.Test.Integration
 			                           "mN Altitude: " + trackInside.Split(';')[3] + "m Velocity: " +
 			                           "0" + "m/s Course: " +
 			                           "0" + "°");
-			Assert.That(_nEventReceived, Is.EqualTo(1));
 
 			//Re-Arrange
 			transponderData = new List<string>();
@@ -84,7 +82,6 @@ namespace SWT35_ATM_Handin3.Test.Integration
 			                           "mN Altitude: " + trackOutside.Split(';')[3] + "m Velocity: " +
 			                           "50000" + "m/s Course: " +
 			                           "90" + "°");
-			Assert.That(_nEventReceived, Is.EqualTo(2));
 		}
 	}
 }
