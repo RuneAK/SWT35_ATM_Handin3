@@ -53,8 +53,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
             _update.TracksUpdated += Raise.EventWith(args);
 
             //Assert
-            _display.Received(1).Clear();
-            _display.Received(1).Write("***Tracks***");
+			_display.Received(1).Write("***Tracks***");
             _display.Received(1).Write($"Tag: " + trackOne.Tag + " CurrentPosition: " + trackOne.Position.X + "mE," +
                                        trackOne.Position.Y +
                                        "mN Altitude: " + trackOne.Position.Altitude + "m Velocity: " +

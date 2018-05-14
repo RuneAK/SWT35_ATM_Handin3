@@ -19,7 +19,6 @@ namespace SWT35_ATM_Handin3.Domain
 
 		private void RenderTracks(object sender, EventTracks e)
 		{
-			_display.Clear();
 			_display.Write("***Tracks***");
 			foreach (var track in e.TrackData)
 			{

@@ -18,6 +18,7 @@ namespace SWT35_ATM_Handin3.Domain
 
 		private void RenderSeparations(object sender, EventSeparation e)
 		{
+			_display.Clear();
 			_display.Write("***Separations***");
 			foreach (var sep in e.SeparationData)
 			{

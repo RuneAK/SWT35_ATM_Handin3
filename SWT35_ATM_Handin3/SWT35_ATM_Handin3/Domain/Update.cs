@@ -12,6 +12,7 @@ namespace SWT35_ATM_Handin3.Domain
 	{
 		public event EventHandler<EventTracks> TracksUpdated;
 		private List<ITrack> _oldTracks;
+		
 		public Update(IFilter filter)
 		{
             _oldTracks = new List<ITrack>();

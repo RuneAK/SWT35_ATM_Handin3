@@ -14,6 +14,7 @@ namespace SWT35_ATM_Handin3.Application
 	{
 		static void Main(string[] args)
 		{
+			IDisplay display = new Display();
 			ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 			IFactory factory = new Factory(transponderReceiver);
 			IAirspace airspace = new Airspace();
@@ -21,7 +22,7 @@ namespace SWT35_ATM_Handin3.Application
 			IUpdate update = new Update(filter);
 			ILogger logger = new Logger();
 			ISeparationDetector separationDetector = new SeparationDetector(update, logger);
-			IDisplay display = new Display();
+			
 			ITrackRender trackRender = new TrackRender(update, display);
 			ISeparationRender separationRender = new SeparationRender(separationDetector, display);
 

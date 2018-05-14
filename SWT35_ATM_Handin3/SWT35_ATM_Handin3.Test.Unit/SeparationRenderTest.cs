@@ -50,6 +50,7 @@ namespace SWT35_ATM_Handin3.Test.Unit
 			_separationDetector.SeparationsUpdated += Raise.EventWith(args);
 
 			//Assert
+			_display.Received(1).Clear();
 			_display.Received(1).Write("***Separations***");
 			_display.Received(1).Write($"Tag1: " + separationOne.Tag1 + " Tag2: " + separationOne.Tag2 + separationOne.TimeStamp);
 			_display.Received(1).Write($"Tag1: " + separationTwo.Tag1 + " Tag2: " + separationTwo.Tag2 + separationTwo.TimeStamp);
